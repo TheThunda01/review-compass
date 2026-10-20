@@ -1,0 +1,346 @@
+{
+  "search_date": "2026-10-20",
+  "scope": "Bounded rapid practice review to guide one inspectable software improvement; not a complete systematic review.",
+  "inclusion_criteria": [
+    "Recent 2022–2026 publications about the relevant review method or workflow",
+    "Primary methodological evaluations preferred; official technical/reporting guidance retained regardless of date",
+    "Direct relevance to traceability, review records, or practical handoff"
+  ],
+  "exclusion_criteria": [
+    "Clinical reviews merely mentioning the method without evaluating it",
+    "Case-specific correspondence without a transferable method",
+    "Sources not selected within the predeclared small appraisal set are logged, not claimed irrelevant"
+  ],
+  "project": "review-compass",
+  "baseline_head": "316554380cfbdbfbfbd729c35b3f7eb5a8de83f5",
+  "searches": [
+    {
+      "id": "rc1",
+      "source": "PubMed connector",
+      "query": "(\"systematic review\"[Title/Abstract]) AND (\"search reporting\"[Title/Abstract] OR \"search documentation\"[Title/Abstract] OR \"search reproducibility\"[Title/Abstract])",
+      "date_from": "2022/01/01",
+      "date_to": "2026/10/20",
+      "date_type": "publication",
+      "sort": "relevance",
+      "offset": 0,
+      "max_results": 10,
+      "max_abstract_chars": 3500,
+      "max_nested_results": 8,
+      "query_translation": "\"systematic review\"[Title/Abstract] AND (\"search reporting\"[Title/Abstract] OR \"search documentation\"[Title/Abstract] OR \"search reproducibility\"[Title/Abstract]) AND 2022/01/01:2026/10/20[Date - Publication]",
+      "total_results": 14,
+      "returned_count": 10,
+      "retrieved_ids": [
+        "36029320",
+        "39176233",
+        "36661375",
+        "38052277",
+        "39308914",
+        "36046062",
+        "38996216",
+        "35398484",
+        "39769346",
+        "38823197"
+      ],
+      "has_more": true,
+      "next_offset": 10,
+      "pagination_used": false,
+      "field_pages": [
+        {
+          "offset": 0,
+          "returned_count": 8,
+          "total_count": 13,
+          "next_offset": 8,
+          "has_more": true,
+          "field": "articles.36029320.authors",
+          "unit": "items"
+        },
+        {
+          "offset": 0,
+          "returned_count": 3500,
+          "total_count": 4891,
+          "next_offset": 3500,
+          "has_more": true,
+          "field": "articles.39176233.abstract",
+          "unit": "characters"
+        },
+        {
+          "offset": 0,
+          "returned_count": 8,
+          "total_count": 10,
+          "next_offset": 8,
+          "has_more": true,
+          "field": "articles.39308914.mesh_terms",
+          "unit": "items"
+        },
+        {
+          "offset": 0,
+          "returned_count": 8,
+          "total_count": 9,
+          "next_offset": 8,
+          "has_more": true,
+          "field": "articles.38996216.authors",
+          "unit": "items"
+        },
+        {
+          "offset": 0,
+          "returned_count": 8,
+          "total_count": 9,
+          "next_offset": 8,
+          "has_more": true,
+          "field": "articles.38996216.mesh_terms",
+          "unit": "items"
+        },
+        {
+          "offset": 0,
+          "returned_count": 8,
+          "total_count": 9,
+          "next_offset": 8,
+          "has_more": true,
+          "field": "articles.35398484.authors",
+          "unit": "items"
+        },
+        {
+          "offset": 0,
+          "returned_count": 8,
+          "total_count": 10,
+          "next_offset": 8,
+          "has_more": true,
+          "field": "articles.35398484.mesh_terms",
+          "unit": "items"
+        }
+      ],
+      "limits": "Only offset 0, first 10 by relevance screened; nested authors/MeSH not continued. Nonselected truncated abstracts not fully appraised."
+    },
+    {
+      "id": "rc2",
+      "source": "PubMed connector",
+      "query": "(\"search strategies\"[Title] OR \"search reporting\"[Title] OR reproducibility[Title]) AND \"systematic reviews\"[Title/Abstract]",
+      "date_from": "2022/01/01",
+      "date_to": "2026/10/20",
+      "date_type": "publication",
+      "sort": "relevance",
+      "offset": 0,
+      "max_results": 10,
+      "max_abstract_chars": 5000,
+      "max_nested_results": 8,
+      "query_translation": "(\"search strategies\"[Title] OR \"search reporting\"[Title] OR \"reproducibility\"[Title]) AND \"systematic reviews\"[Title/Abstract] AND 2022/01/01:2026/10/20[Date - Publication]",
+      "total_results": 49,
+      "returned_count": 10,
+      "retrieved_ids": [
+        "35995861",
+        "36423417",
+        "36303079",
+        "37681507",
+        "35690767",
+        "39692226",
+        "40388051",
+        "34806918",
+        "38167166",
+        "36179444"
+      ],
+      "has_more": true,
+      "next_offset": 10,
+      "pagination_used": false,
+      "field_pages": [
+        {
+          "offset": 0,
+          "returned_count": 5000,
+          "total_count": 5253,
+          "next_offset": 5000,
+          "has_more": true,
+          "field": "articles.37681507.abstract",
+          "unit": "characters"
+        }
+      ],
+      "limits": "Only offset 0, first 10 by relevance screened; nested authors/MeSH not continued. Nonselected truncated abstracts not fully appraised."
+    },
+    {
+      "id": "official-guidance",
+      "source": "Targeted web opens",
+      "total_results": null,
+      "count_meaning": "Search universe not enumerated; specified documents only.",
+      "retrieved_ids": [
+        "https://www.prisma-statement.org/prisma-search",
+        "https://pmc.ncbi.nlm.nih.gov/articles/PMC7839230/"
+      ],
+      "limits": "Selected official guidance and specifications; not an exhaustive supplementary search."
+    }
+  ],
+  "screening": [
+    {
+      "search_id": "rc1",
+      "pmid": "36029320",
+      "title": "Adherence to literature search reporting guidelines in leading rheumatology journals' systematic reviews: umbrella review protocol.",
+      "decision": "not_selected",
+      "reason": "Initial query title screening: not selected for the focused methodological appraisal.",
+      "access": "Title screening; no full-text appraisal"
+    },
+    {
+      "search_id": "rc1",
+      "pmid": "39176233",
+      "title": "Searching and reporting in Campbell Collaboration systematic reviews: A systematic assessment of current methods.",
+      "decision": "selected",
+      "reason": "Direct recent evaluation of the method relevant to software scope.",
+      "access": "Abstract and first 12,000 full-text characters; remainder not appraised."
+    },
+    {
+      "search_id": "rc1",
+      "pmid": "36661375",
+      "title": "The Quality of Literature Search Reporting in Systematic Reviews Published in the Urological Literature (1998-2021).",
+      "decision": "not_selected",
+      "reason": "Initial query title screening: not selected for the focused methodological appraisal.",
+      "access": "Title screening; no full-text appraisal"
+    },
+    {
+      "search_id": "rc1",
+      "pmid": "38052277",
+      "title": "Systematic review search strategies are poorly reported and not reproducible: a cross-sectional metaresearch study.",
+      "decision": "selected",
+      "reason": "Direct recent evaluation of the method relevant to software scope.",
+      "access": "Complete abstract and citation; full text not appraised."
+    },
+    {
+      "search_id": "rc1",
+      "pmid": "39308914",
+      "title": "Effect of librarian collaboration on otolaryngology systematic review and meta-analysis quality.",
+      "decision": "not_selected",
+      "reason": "Initial query title screening: not selected for the focused methodological appraisal.",
+      "access": "Title screening; no full-text appraisal"
+    },
+    {
+      "search_id": "rc1",
+      "pmid": "36046062",
+      "title": "Artificial Intelligence for the Prediction of In-Hospital Clinical Deterioration: A Systematic Review.",
+      "decision": "not_selected",
+      "reason": "Initial query title screening: not selected for the focused methodological appraisal.",
+      "access": "Title screening; no full-text appraisal"
+    },
+    {
+      "search_id": "rc1",
+      "pmid": "38996216",
+      "title": "Intramedullary Fixation Versus Plate Fixation of Distal Fibular Fractures: A Systematic Review.",
+      "decision": "not_selected",
+      "reason": "Initial query title screening: not selected for the focused methodological appraisal.",
+      "access": "Title screening; no full-text appraisal"
+    },
+    {
+      "search_id": "rc1",
+      "pmid": "35398484",
+      "title": "Outcomes After Arthroscopic Revision Bankart Repair: An Updated Systematic Review of Recent Literature.",
+      "decision": "not_selected",
+      "reason": "Initial query title screening: not selected for the focused methodological appraisal.",
+      "access": "Title screening; no full-text appraisal"
+    },
+    {
+      "search_id": "rc1",
+      "pmid": "39769346",
+      "title": "The Effects of Gender on Mesenchymal Stromal Cell (MSC) Proliferation and Differentiation In Vitro: A Systematic Review.",
+      "decision": "not_selected",
+      "reason": "Initial query title screening: not selected for the focused methodological appraisal.",
+      "access": "Title screening; no full-text appraisal"
+    },
+    {
+      "search_id": "rc1",
+      "pmid": "38823197",
+      "title": "Medical management for cerebellar mutism syndrome following posterior fossa surgery: A systematic review.",
+      "decision": "not_selected",
+      "reason": "Initial query title screening: not selected for the focused methodological appraisal.",
+      "access": "Title screening; no full-text appraisal"
+    },
+    {
+      "search_id": "rc2",
+      "pmid": "35995861",
+      "title": "Transparency of reporting search strategies in systematic reviews.",
+      "decision": "not_selected",
+      "reason": "Title screening: outside the two-publication detailed-appraisal limit or not direct fit for this implementation.",
+      "access": "Title screening; no full-text appraisal"
+    },
+    {
+      "search_id": "rc2",
+      "pmid": "36423417",
+      "title": "Reproducibility in sleep and circadian science systematic reviews and meta-analyses.",
+      "decision": "not_selected",
+      "reason": "Title screening: outside the two-publication detailed-appraisal limit or not direct fit for this implementation.",
+      "access": "Title screening; no full-text appraisal"
+    },
+    {
+      "search_id": "rc2",
+      "pmid": "36303079",
+      "title": "Reproducibility of artificial intelligence models in computed tomography of the head: a quantitative analysis.",
+      "decision": "not_selected",
+      "reason": "Title screening: outside the two-publication detailed-appraisal limit or not direct fit for this implementation.",
+      "access": "Title screening; no full-text appraisal"
+    },
+    {
+      "search_id": "rc2",
+      "pmid": "37681507",
+      "title": "Search strategies (filters) to identify systematic reviews in MEDLINE and Embase.",
+      "decision": "not_selected",
+      "reason": "Title screening: outside the two-publication detailed-appraisal limit or not direct fit for this implementation.",
+      "access": "Title screening; no full-text appraisal"
+    },
+    {
+      "search_id": "rc2",
+      "pmid": "35690767",
+      "title": "Reproducibility of prediction models in health services research.",
+      "decision": "not_selected",
+      "reason": "Title screening: outside the two-publication detailed-appraisal limit or not direct fit for this implementation.",
+      "access": "Title screening; no full-text appraisal"
+    },
+    {
+      "search_id": "rc2",
+      "pmid": "39692226",
+      "title": "Reproducibility and transparency in systematic reviews.",
+      "decision": "not_selected",
+      "reason": "Title screening: outside the two-publication detailed-appraisal limit or not direct fit for this implementation.",
+      "access": "Title screening; no full-text appraisal"
+    },
+    {
+      "search_id": "rc2",
+      "pmid": "40388051",
+      "title": "Search strategies for systematic reviews in reproductive medicine: a narrative review and practical guide.",
+      "decision": "not_selected",
+      "reason": "Title screening: outside the two-publication detailed-appraisal limit or not direct fit for this implementation.",
+      "access": "Title screening; no full-text appraisal"
+    },
+    {
+      "search_id": "rc2",
+      "pmid": "34806918",
+      "title": "Reproducibility of cerebrovascular reactivity measurements: A systematic review of neuroimaging techniques.",
+      "decision": "not_selected",
+      "reason": "Title screening: outside the two-publication detailed-appraisal limit or not direct fit for this implementation.",
+      "access": "Title screening; no full-text appraisal"
+    },
+    {
+      "search_id": "rc2",
+      "pmid": "38167166",
+      "title": "Development of search strategies for systematic reviews in health using ChatGPT: a critical analysis.",
+      "decision": "not_selected",
+      "reason": "Title screening: outside the two-publication detailed-appraisal limit or not direct fit for this implementation.",
+      "access": "Title screening; no full-text appraisal"
+    },
+    {
+      "search_id": "rc2",
+      "pmid": "36179444",
+      "title": "The transparency and reproducibility of systematic reviews in forensic science.",
+      "decision": "not_selected",
+      "reason": "Title screening: outside the two-publication detailed-appraisal limit or not direct fit for this implementation.",
+      "access": "Title screening; no full-text appraisal"
+    }
+  ],
+  "appraisal_limit": "Title screening of first 10 relevance-ranked results from each of two queries; detailed appraisal of two selected current methodological publications plus official guidance. Remaining pages not screened.",
+  "access_attempts": [
+    {
+      "source": "PubMed full-text connector",
+      "id": "PMC11339316",
+      "outcome": "First 12000 of 63357 body characters retrieved; no continuation. Scope limited to abstract and opening/methods context."
+    }
+  ],
+  "counts": {
+    "search_pages": 2,
+    "returned_records": 20,
+    "unique_title_screened_ids": 20,
+    "current_publications_appraised": 2,
+    "official_sources_appraised": 2
+  }
+}

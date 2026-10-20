@@ -1,0 +1,37 @@
+{
+  "schema": "review-compass-search-record/1",
+  "recordedMetadata": {
+    "recordId": "synthetic-search-001",
+    "database": "Fictional evidence database",
+    "platform": "Synthetic example interface",
+    "searchDate": "2026-10-20",
+    "executionStatus": "draft",
+    "resultCount": null,
+    "limits": "No search was executed. This metadata is an example only.",
+    "notes": "Replace every example field with your own documented search context."
+  },
+  "queryText": "(\"college students\"[Title/Abstract] OR \"university students\"[Title/Abstract])\nAND (\"food insecurity\"[Title/Abstract] OR \"food insufficiency\"[Title/Abstract])\n",
+  "sourceFingerprints": {
+    "querySha256": "18fbca0c6ffe38705523d69d71e4725885a03e2b37735c54d52a9f0c795034b3",
+    "metadataSha256": "65063e0550b80a8f470a61c44e4ce6ba79a979c3d02ffc1b81c83bf5acd0068a",
+    "queryFile": "search-draft.txt",
+    "metadataFile": "search-record-metadata.json"
+  },
+  "structuralAudit": {
+    "schemaVersion": 1,
+    "status": "No listed structural issue detected",
+    "characterCount": 158,
+    "offsetConvention": "zero-based UTF-16 code units",
+    "closedQuotedPhrases": 4,
+    "maximumParenthesisDepth": 1,
+    "manualReviewRequired": true,
+    "issues": [],
+    "limitations": [
+      "Not a database parser: Boolean grammar, field tags, limits, controlled vocabulary, and phrase handling are not validated.",
+      "No search was submitted. Retrieval counts, recall, precision, and scientific coverage are unknown.",
+      "Inspect the exact query in its target platform and arrange appropriate peer review."
+    ]
+  },
+  "interpretation": "Operator-reported metadata. Review Compass did not execute the search, verify its result count, evaluate recall, or determine eligibility.",
+  "unknownCountMeaning": "null means unknown or not recorded; zero means the operator explicitly reported zero results."
+}

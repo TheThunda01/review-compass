@@ -37,3 +37,8 @@ Node tests check the behaviors above with small, explicit examples. They include
 The original educational pages cover several review designs. Their brief descriptions are starting points for discussion, not substitutes for each method's full guidance. Search strings require database-specific testing and peer review. This release changes the unsafe certainty of the old keyword and readiness indicators; it does not claim to implement a full systematic-review management platform.
 
 Sources checked on 2026-10-20. The existing template license is retained, and no code from the cited reporting guideline or ASReview software is copied into this implementation.
+
+
+## Operator-reported search records
+
+`tools/record-search.mjs` adds a standalone custom JSON record pairing query text and input-file fingerprints with required database, platform, date, execution-status, count, and limits fields. It does not execute a search. `draft` requires a null result count; `reported_executed` records the operator's statement, with null still permitted when a count is unknown. A recorded zero is distinct from missing information. The existing structural audit is embedded without treating a flagged query as an invalid historical record. See [practical use](practical-use.md) for exact input bounds, schema, exit codes, and overwrite protection. The browser planner's state and screening behavior are unchanged.
