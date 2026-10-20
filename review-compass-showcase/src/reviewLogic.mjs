@@ -301,61 +301,83 @@ export function buildReviewTypeGuide(project) {
   };
 }
 
+export function matchesLiteralTerm(text, term) {
+  const normalizedText = normalizeText(text).normalize("NFC");
+  const normalizedTerm = normalizeText(term).normalize("NFC");
+  if (!normalizedTerm) return false;
+  const escaped = normalizedTerm.replace(/[.*+?^${}()|[\]\\]/g, "\\$&");
+  // Unicode word boundaries prevent, for example, rat from matching rate.
+  return new RegExp(`(?:^|[^\\p{L}\\p{N}_])${escaped}(?=$|[^\\p{L}\\p{N}_])`, "iu").test(normalizedText);
+}
+
+export function projectFieldSummary(project) {
+  const fields = ["topic", "population", "concept", "context", "outcomes", "databases", "include", "exclude", "teamPlan"];
+  const present = fields.filter((key) => normalizeText(project[key]).length > 0);
+  return { present: present.length, total: fields.length, missing: fields.filter((key) => !present.includes(key)) };
+}
+
 export function buildCommonGapChecks(project) {
-  const sourceCount = getSourceList(project).length;
-  const termCount = buildSearchTerms(project).reduce((sum, group) => sum + group.terms.length, 0);
-  const text = `${project.include} ${project.exclude} ${project.teamPlan}`;
-  const teamPlan = normalizeText(project.teamPlan);
-  const protocolReady = ["topic", "population", "concept", "include", "exclude"].every((key) => normalizeText(project[key]).length >= 8);
+  const sources = getSourceList(project);
+  const terms = buildSearchTerms(project).reduce((sum, group) => sum + group.terms.length, 0);
+  const supplied = (key) => normalizeText(project[key]).length > 0;
+  const mentions = (text, words) => words.some((word) => matchesLiteralTerm(text, word));
+  const team = normalizeText(project.teamPlan);
   const rows = [
-    ["Review type fit", "Students often choose a review label before they know the purpose of the review.", `Use the guide to check whether a ${reviewTypeName(project.reviewType).toLowerCase()} matches the question.`, "steady", "Selected", 92],
-    ["Protocol rationale", "Weak protocols make eligibility rules drift during screening.", "Write the reason for the review, the question frame, and the inclusion and exclusion rules before searching.", protocolReady ? "steady" : "needs", protocolReady ? "Ready" : "Add detail", protocolReady ? 86 : 48],
-    ["Search reproducibility", "Searches are hard to repeat when sources, dates, limits, and record counts are missing.", "Keep a search file with exact strategies, dates searched, limits, deduplication, and counts.", sourceCount >= 2 ? "steady" : "needs", sourceCount >= 2 ? "Document" : "Name sources", sourceCount >= 2 ? 82 : 40],
-    ["Search term coverage", "Missed synonyms, controlled vocabulary, or field tags can change what the review finds.", "Expand each concept with synonyms and controlled vocabulary, then ask for peer review.", termCount >= 8 ? "steady" : "needs", termCount >= 8 ? "Broad enough" : "Expand terms", termCount >= 8 ? 78 : 44],
-    ["Date and language limits", "Arbitrary restrictions can miss eligible studies and make the review harder to defend.", "Use limits only when the protocol explains the reason and likely tradeoff.", /date|language|limit|restriction|english|year/i.test(text) ? "watch" : "steady", /date|language|limit|restriction|english|year/i.test(text) ? "Justify" : "Open search", /date|language|limit|restriction|english|year/i.test(text) ? 62 : 84],
-    ["Screening reliability", "Single-reviewer screening can miss records or apply criteria inconsistently.", "Use two independent reviewers when possible, or document a mentor check and conflict rule.", /two|dual|independent|second|mentor/i.test(teamPlan) ? "steady" : "needs", /two|dual|independent|second|mentor/i.test(teamPlan) ? "Checked" : "Add checker", /two|dual|independent|second|mentor/i.test(teamPlan) ? 84 : 38],
-    ["Extraction piloting", "Data extraction errors are common when fields are vague or reviewers are not trained.", "Pilot the form on a small sample, revise definitions, and record disagreement handling.", /pilot|sample|calibration|test/i.test(teamPlan) ? "steady" : "watch", /pilot|sample|calibration|test/i.test(teamPlan) ? "Piloted" : "Plan pilot", /pilot|sample|calibration|test/i.test(teamPlan) ? 82 : 58],
-    ["Synthesis plan", "Teams can collect too much data if they do not know how findings will be summarized.", "Name the synthesis approach before extraction, including maps, themes, narrative groups, or effect estimates.", normalizeText(project.outcomes).length >= 8 || normalizeText(project.context).length >= 8 ? "steady" : "needs", normalizeText(project.outcomes).length >= 8 || normalizeText(project.context).length >= 8 ? "Visible" : "Choose plan", normalizeText(project.outcomes).length >= 8 || normalizeText(project.context).length >= 8 ? 80 : 42],
-    ["Bias and certainty plan", "Evidence can look stronger than it is when appraisal, certainty, and limitations are not planned.", "Match the appraisal tool to the study designs and decide whether GRADE or another certainty approach is needed.", /bias|quality|grade|appraisal|certainty|rob/i.test(teamPlan) ? "steady" : "watch", /bias|quality|grade|appraisal|certainty|rob/i.test(teamPlan) ? "Named" : "Name tool", /bias|quality|grade|appraisal|certainty|rob/i.test(teamPlan) ? 82 : 60],
-    ["Reporting checklist", "Good review work can still be hard to trust if reporting misses required checklist items.", `Use ${project.reviewType === "scoping" || project.reviewType === "mapping" ? "PRISMA-ScR and PRISMA-S" : "PRISMA 2020 and PRISMA-S"} when drafting the final report.`, "steady", "Matched", 88]
+    ["Review type fit", "A selected label does not establish that a review design fits the question.", `Check whether a ${reviewTypeName(project.reviewType).toLowerCase()} suits the purpose.`, "Selected; check fit"],
+    ["Protocol rationale", "Populated fields do not establish a complete or defensible protocol.", "Review the rationale, question, eligibility rules, and planned methods with the team.", supplied("include") && supplied("exclude") ? "Rules supplied; review them" : "Add eligibility rules"],
+    ["Search reproducibility", "A list of sources does not document an executed search.", "Record exact strategies, database platforms, search dates, limits, deduplication, and counts.", `${sources.length} sources named; check coverage`],
+    ["Search term coverage", "A term count cannot establish search sensitivity or completeness.", "Review synonyms and controlled vocabulary; test relevant known records with a librarian.", `${terms} draft terms; check coverage`],
+    ["Date and language limits", "Keyword checks cannot establish whether limits were applied or justified.", "Review and document any limits and their rationale manually.", "Check manually"],
+    ["Screening process", "Mentioning reviewers does not establish independent screening or agreement.", "Confirm reviewer roles, piloting, and disagreement handling.", mentions(team, ["two", "dual", "independent", "second", "mentor", "librarian"]) ? "Reviewer wording mentioned" : "Check reviewer plan"],
+    ["Extraction piloting", "A plan or a mention of piloting is not evidence that it occurred.", "Pilot the form, record changes, and retain the decisions made.", mentions(team, ["pilot", "piloted", "calibration", "test"]) ? "Pilot wording mentioned" : "Check pilot plan"],
+    ["Synthesis plan", "Outcomes and context fields do not specify a synthesis method.", "Decide how evidence will be grouped or combined and explain that choice.", "Check manually"],
+    ["Bias and certainty plan", "Naming an appraisal tool does not demonstrate an appropriate assessment.", "Select an appraisal or certainty approach suited to the question and designs, where appropriate.", mentions(team, ["bias", "quality", "GRADE", "appraisal", "certainty", "RoB"]) ? "Appraisal wording mentioned" : "Check appraisal plan"],
+    ["Reporting checklist", "A suggested checklist is a planning prompt, not a compliance certificate.", "Choose the reporting guidance appropriate to the review and check its applicable items.", "Check manually"]
   ];
-  return rows.map(([gap, need, action, status, statusLabel, score]) => ({ gap, need, action, status, statusLabel, score }));
+  return rows.map(([gap, need, action, statusLabel]) => ({ gap, need, action, status: "watch", statusLabel }));
+}
+
+export function buildProtocolSnapshot(project) {
+  const fields = projectFieldSummary(project);
+  return {
+    fields,
+    cards: [
+      { title: "Purpose and question", text: buildQuestion(project), action: "Check the question and review design with a mentor.", statusLabel: "Draft question" },
+      ...buildCommonGapChecks(project).filter((item) => ["Protocol rationale", "Search term coverage", "Screening process", "Extraction piloting", "Reporting checklist"].includes(item.gap))
+        .map((item) => ({ title: item.gap, text: item.need, action: item.action, statusLabel: item.statusLabel }))
+    ]
+  };
 }
 
 export function screenRecord(recordText, project) {
-  const record = normalizeText(recordText).toLowerCase();
-  if (!record) return { decision: "Exclude", confidence: "Low", reasons: ["No title or abstract was provided."], matchedTerms: [] };
-  const includeTerms = [...splitList(project.population), ...splitList(project.concept), ...splitList(project.outcomes), ...splitList(project.context)];
-  const exclusionTerms = [...EXCLUDE_SIGNALS, ...splitList(project.exclude)].map((term) => term.toLowerCase()).filter((term) => term.length > 2);
-  const matchedTerms = unique(includeTerms.filter((term) => record.includes(term.toLowerCase())));
-  const matchedExclusions = unique(exclusionTerms.filter((term) => record.includes(term)));
-  const matchedDesign = DESIGN_TERMS.find((term) => record.includes(term));
-  const hasPopulation = splitList(project.population).some((term) => record.includes(term.toLowerCase()));
-  const hasConcept = splitList(project.concept).some((term) => record.includes(term.toLowerCase()));
-  const hasOutcomeOrContext = splitList(project.outcomes).some((term) => record.includes(term.toLowerCase())) || splitList(project.context).some((term) => record.includes(term.toLowerCase()));
-  const reasons = [];
-  if (matchedExclusions.length) reasons.push(`The record contains exclusion signals: ${matchedExclusions.join(", ")}.`);
-  if (hasPopulation) reasons.push("The population appears to match.");
-  if (hasConcept) reasons.push("The concept or exposure appears to match.");
-  if (hasOutcomeOrContext) reasons.push("The outcomes, setting, or context appear relevant.");
-  if (matchedDesign) reasons.push(`The abstract names an empirical design signal: ${matchedDesign}.`);
-  if (!reasons.length) reasons.push("The record does not clearly match the core review terms.");
-  const includeScore = [hasPopulation, hasConcept, hasOutcomeOrContext].filter(Boolean).length;
-  return {
-    decision: !matchedExclusions.length && includeScore >= 2 ? "Include" : "Exclude",
-    confidence: matchedExclusions.length || includeScore === 3 ? "High" : includeScore === 2 ? "Medium" : "Low",
-    reasons,
-    matchedTerms
+  const record = normalizeText(recordText);
+  const collect = (terms) => unique(terms.filter((term) => matchesLiteralTerm(record, term)));
+  const signals = {
+    population: collect(splitList(project.population)),
+    concept: collect(splitList(project.concept)),
+    outcomes: collect(splitList(project.outcomes)),
+    context: collect(splitList(project.context)),
+    design: collect(DESIGN_TERMS),
+    exclusion: collect([...EXCLUDE_SIGNALS, ...splitList(project.exclude)])
   };
+  const matchedTerms = unique([...signals.population, ...signals.concept, ...signals.outcomes, ...signals.context]);
+  const reasons = [];
+  if (!record) reasons.push("No title or abstract was provided. Add the record text before reviewing it.");
+  for (const [group, words] of Object.entries(signals)) {
+    if (words.length) reasons.push(`${group === "exclusion" ? "Potential exclusion cue words" : `${sentenceCase(group)} keywords`} present: ${words.join(", ")}.`);
+  }
+  if (record && !matchedTerms.length) reasons.push("No configured project keyword phrases were found. Missing keywords do not establish ineligibility.");
+  reasons.push("These are literal keyword signals, not an eligibility decision. Negation, context, study design, synonyms, and the complete criteria require human review.");
+  return { status: "Needs human review", inputStatus: record ? "Text supplied" : "No text supplied", reasons, matchedTerms, matchedExclusions: signals.exclusion, signals };
 }
 
 export function buildSubmissionCopy(project) {
   const description =
-    "Review Compass is a student-friendly app that helps students plan evidence reviews, from systematic and scoping reviews to rapid, umbrella, mapping, qualitative, mixed-methods, integrative, narrative, realist, and meta-analysis projects. It turns a rough topic into a review-type guide, structured question, search drafts, screening practice, extraction fields, gap checks, project notes, and a reporting checklist. Grounded in PRISMA, PRISMA-S, PRISMA-ScR, Cochrane, JBI, and review-method guidance.";
+    "Review Compass is a student-friendly app that helps students plan evidence reviews, from systematic and scoping reviews to rapid, umbrella, mapping, qualitative, mixed-methods, integrative, narrative, realist, and meta-analysis projects. It turns a rough topic into a review-type guide, structured question, search drafts, keyword triage for human review, extraction fields, gap checks, project notes, and a reporting checklist. Grounded in PRISMA, PRISMA-S, PRISMA-ScR, Cochrane, JBI, and review-method guidance.";
   const sources = getSourceList(project);
   return {
     title: "Review Compass",
-    link: "https://raw.githack.com/TheThunda01/github-portfolio-builder/main/review-compass-showcase/index.html",
+    link: "https://raw.githack.com/TheThunda01/review-compass/main/review-compass-showcase/index.html",
     description,
     impact: `For the sample topic, the app produces this working question: ${buildQuestion(project)}`,
     tools: "AI-supported planning and testing, browser-based JavaScript, and published evidence-synthesis reporting guidance.",
@@ -364,27 +386,24 @@ export function buildSubmissionCopy(project) {
 }
 
 export function buildReadinessGuidance(project) {
-  const required = [["topic", "working topic"], ["population", "population or problem"], ["concept", "concept or intervention"], ["context", "context, comparison, or setting"], ["outcomes", "outcomes or evidence signals"], ["databases", "databases and sources"], ["include", "inclusion rule"], ["exclude", "exclusion rule"], ["teamPlan", "reviewer plan"]];
-  const missing = required.filter(([key]) => normalizeText(project[key]).length < 8).map(([, label]) => label);
-  const notes = [];
-  if (missing.length) notes.push(`Strengthen the ${missing.slice(0, 3).join(", ")} field${missing.length > 1 ? "s" : ""}.`);
-  if (getSourceList(project).length < 2) notes.push("Name at least two relevant databases or sources before treating the search as ready.");
-  if (!/two|dual|independent|second/i.test(normalizeText(project.teamPlan))) notes.push("Clarify whether a second reviewer, mentor, or librarian will check screening or the search.");
-  if (!notes.length) notes.push("This is ready for a mentor or librarian methods review.");
-  const score = computeReadiness(project);
-  return { label: score >= 90 ? "ready for methods review" : score >= 65 ? "nearly ready" : "drafting plan", notes };
+  const fields = projectFieldSummary(project);
+  const notes = ["Field completion records text entry only; it does not assess protocol quality or completed research steps."];
+  if (fields.missing.length) notes.push(`Add or intentionally document missing fields: ${fields.missing.join(", ")}.`);
+  notes.push("Ask a mentor or librarian to review the design, coverage, criteria, and planned methods.");
+  return { label: `${fields.present} of ${fields.total} fields filled; not validated`, notes };
 }
 
 export function buildExportMarkdown(project, databaseKey = "pubmed", recordText = "", notes = "") {
   const guide = buildReviewTypeGuide(project);
   const readiness = buildReadinessGuidance(project);
   const screening = screenRecord(recordText, project);
-  return `# Review Compass\n\n## Review Question\n${buildQuestion(project)}\n\n## Rationale\n${buildRationale(project)}\n\n## Review Type Guidance\nSelected type: ${guide.selected.label}\nBest fit: ${guide.selected.bestFor}\nWatch-out: ${guide.selected.caution}\n\n## Common Gap Checks\n${buildCommonGapChecks(project).map((item) => `- ${item.gap}: ${item.action}`).join("\n")}\n\n## Readiness Notes\nStatus: ${readiness.label}\n${readiness.notes.map((note) => `- ${note}`).join("\n")}\n\n## Eligibility Criteria\n${buildEligibility(project).map((row) => `- ${row.label}: ${row.text}`).join("\n")}\n\n## Search Draft\n\`\`\`\n${buildSearchString(project, databaseKey)}\n\`\`\`\n\n## Screening Practice\nDecision: ${screening.decision}\nConfidence: ${screening.confidence}\nReasons:\n${screening.reasons.map((reason) => `- ${reason}`).join("\n")}\n\n## Extraction Fields\n${buildExtractionRows(project).map((row) => `- ${row.field}: ${row.description} ${row.note}`).join("\n")}\n\n## Reporting Readiness\n${buildReportingChecklist(project).map((item) => `- ${item.title}: ${item.text}`).join("\n")}\n\n## Student Notes\n${normalizeText(notes) || "No student notes were added yet."}\n\n## Handshake Description\n${buildSubmissionCopy(project).description}\n`;
+  return `# Review Compass\n\n## Review Question\n${buildQuestion(project)}\n\n## Rationale\n${buildRationale(project)}\n\n## Review Type Guidance\nSelected type: ${guide.selected.label}\nBest fit: ${guide.selected.bestFor}\nWatch-out: ${guide.selected.caution}\n\n## Common Gap Checks\n${buildCommonGapChecks(project).map((item) => `- ${item.gap}: ${item.action}`).join("\n")}\n\n## Planning Notes\nField status: ${readiness.label}\n${readiness.notes.map((note) => `- ${note}`).join("\n")}\n\n## Eligibility Criteria\n${buildEligibility(project).map((row) => `- ${row.label}: ${row.text}`).join("\n")}\n\n## Search Draft\n\`\`\`\n${buildSearchString(project, databaseKey)}\n\`\`\`\n\n## Keyword Triage\nStatus: ${screening.status}\nInput: ${screening.inputStatus}\nSignals and limitations:\n${screening.reasons.map((reason) => `- ${reason}`).join("\n")}\n\n## Extraction Fields\n${buildExtractionRows(project).map((row) => `- ${row.field}: ${row.description} ${row.note}`).join("\n")}\n\n## Reporting Prompts\n${buildReportingChecklist(project).map((item) => `- ${item.title}: ${item.text}`).join("\n")}\n\n## Student Notes\n${normalizeText(notes) || "No student notes were added yet."}\n\n## Project Description\n${buildSubmissionCopy(project).description}\n`;
 }
 
+// Retained for callers of the older API: this is field completion, not readiness.
 export function computeReadiness(project) {
-  const fields = [project.topic, project.population, project.concept, project.context, project.outcomes, project.databases, project.include, project.exclude, project.teamPlan];
-  return Math.round((fields.filter((field) => normalizeText(field).length >= 8).length / fields.length) * 100);
+  const fields = projectFieldSummary(project);
+  return Math.round(fields.present / fields.total * 100);
 }
 
 export function reviewTypeName(reviewType) {

@@ -1,3 +1,5 @@
+import { buildProtocolSnapshot } from "./reviewLogic.mjs";
+
 const defaultFlowCounts = {
   databaseRecords: 124,
   registerRecords: 8,
@@ -94,50 +96,24 @@ function readProject() {
 }
 
 function renderProtocol() {
-  const project = readProject();
-  const score = readinessScore(project);
-  const sources = splitList(project.databases);
-  const termCount = [
-    ...splitList(project.population),
-    ...splitList(project.concept),
-    ...splitList(project.context),
-    ...splitList(project.outcomes)
-  ].length;
-  const teamPlan = project.teamPlan.toLowerCase();
-  const hasReviewerCheck = /two|dual|independent|second|mentor|librarian/.test(teamPlan);
-  const hasPilotPlan = /pilot|sample|calibration|test/.test(teamPlan);
-  const hasCore = ["topic", "population", "concept", "include", "exclude"].every((key) => project[key].length >= 8);
-  const cards = [
-    card("Purpose and question", score, `Systematic review using PICO: ${question(project)}`, "Use this as a first draft for mentor feedback."),
-    card("Eligibility criteria", hasCore ? 86 : 46, hasCore ? "The inclusion and exclusion rules are specific enough for a first methods review." : "The protocol still needs clearer inclusion or exclusion wording.", "Keep criteria tied to the question so screening decisions do not drift."),
-    card("Search coverage", sources.length >= 2 && termCount >= 8 ? 84 : 58, `${sources.length} source${sources.length === 1 ? "" : "s"} named and ${termCount} draft term${termCount === 1 ? "" : "s"} visible.`, "Ask a librarian to check source coverage and syntax."),
-    card("Screening reliability", hasReviewerCheck ? 84 : 40, hasReviewerCheck ? "The plan names a second reviewer, mentor, or librarian check." : "The plan still reads like a single-reviewer workflow.", "Add a conflict-resolution rule before screening real records."),
-    card("Extraction and synthesis", hasPilotPlan ? 82 : 62, hasPilotPlan ? "The team plan includes a pilot signal." : "The extraction form should be piloted on a small sample.", "Document field changes with dates and reasons."),
-    card("Reporting readiness", 76, "Use PRISMA 2020, PRISMA-S, and a source log while drafting.", "Keep record counts, report counts, and included-study counts separate.")
-  ];
-  const average = Math.round(cards.reduce((sum, item) => sum + item.score, 0) / cards.length);
-
+  const snapshot = buildProtocolSnapshot(readProject());
   protocolOutput.innerHTML = `
-    <section class="snapshot-hero ${status(average)}">
+    <section class="snapshot-hero watch">
       <div>
         <p class="surface-label">Protocol snapshot</p>
-        <h4>${escapeHtml(average >= 80 ? "ready for methods review" : "nearly ready")}</h4>
-        <p>${escapeHtml(average >= 80 ? "This draft has enough structure for a useful mentor or librarian conversation." : "This draft is moving, but a few method decisions still need attention.")}</p>
+        <h4>Methods still need human review</h4>
+        <p>These prompts describe text entered in the form. They do not verify search coverage, completed piloting, or protocol quality.</p>
       </div>
-      <div class="snapshot-score"><strong>${average}%</strong><span>mentor-review readiness</span></div>
+      <div class="snapshot-score"><strong>${snapshot.fields.present}/${snapshot.fields.total}</strong><span>fields contain text</span></div>
     </section>
     <div class="snapshot-grid">
-      ${cards
-        .map(
-          (item) => `
-          <article class="snapshot-card ${status(item.score)}">
-            <div class="card-kicker"><span>${labelForStatus(status(item.score))}</span><meter min="0" max="100" value="${item.score}">${item.score}%</meter></div>
-            <h4>${escapeHtml(item.title)}</h4>
-            <p>${escapeHtml(item.text)}</p>
-            <em>${escapeHtml(item.action)}</em>
-          </article>`
-        )
-        .join("")}
+      ${snapshot.cards.map((item) => `
+        <article class="snapshot-card watch">
+          <div class="card-kicker"><span>${escapeHtml(item.statusLabel)}</span></div>
+          <h4>${escapeHtml(item.title)}</h4>
+          <p>${escapeHtml(item.text)}</p>
+          <em>${escapeHtml(item.action)}</em>
+        </article>`).join("")}
     </div>
   `;
 }
@@ -157,7 +133,7 @@ function renderAudit() {
       <div>
         <p class="surface-label">Search peer review</p>
         <h4>${checked} of ${total} checks complete</h4>
-        <p>${escapeHtml(nextItem ? `Next, check: ${nextItem.label}` : "This search draft is ready for a librarian or mentor to review.")}</p>
+        <p>${escapeHtml(nextItem ? `Next, check: ${nextItem.label}` : "All boxes are self-marked complete; a librarian or mentor should still review the search.")}</p>
       </div>
       <div class="audit-meter"><meter min="0" max="100" value="${percent}">${percent}%</meter><strong>${percent}%</strong></div>
     </section>
@@ -192,7 +168,7 @@ function renderFlow() {
     <section class="flow-summary ${flow.problems.length ? "needs" : "steady"}">
       <div>
         <p class="surface-label">PRISMA-style count check</p>
-        <h4>${flow.studiesIncluded} studies included</h4>
+        <h4>${flow.reportsIncluded} reports remaining</h4>
         <p>${flow.problems.length ? "Fix the count relationship before using this in a report." : "No impossible count relationships were detected."}</p>
       </div>
       <div class="flow-total"><strong>${flow.recordsIdentified}</strong><span>records identified</span></div>
@@ -222,7 +198,7 @@ function flowModel(counts) {
   const recordsScreened = Math.max(0, recordsIdentified - removed);
   const reportsSought = Math.max(0, recordsScreened - input.recordsExcluded);
   const reportsAssessed = Math.max(0, reportsSought - input.reportsNotRetrieved);
-  const studiesIncluded = Math.max(0, reportsAssessed - input.reportsExcluded);
+  const reportsIncluded = Math.max(0, reportsAssessed - input.reportsExcluded);
   const problems = [];
   const cautions = [];
 
@@ -238,7 +214,7 @@ function flowModel(counts) {
   return {
     recordsIdentified,
     recordsScreened,
-    studiesIncluded,
+    reportsIncluded,
     problems,
     cautions,
     steps: [
@@ -247,7 +223,7 @@ function flowModel(counts) {
       { label: "Records screened", value: recordsScreened, detail: `${input.recordsExcluded} excluded by title or abstract screening.` },
       { label: "Reports sought", value: reportsSought, detail: `${input.reportsNotRetrieved} reports not retrieved.` },
       { label: "Reports assessed", value: reportsAssessed, detail: `${input.reportsExcluded} full-text reports excluded with reasons.` },
-      { label: "Studies included", value: studiesIncluded, detail: "Keep report counts separate if multiple reports describe one study." }
+      { label: "Reports remaining", value: reportsIncluded, detail: "Count distinct studies separately; several reports may describe one study." }
     ]
   };
 }
@@ -262,36 +238,6 @@ function hydrateFlowForm() {
     const field = flowForm.elements.namedItem(key);
     if (field && field.value !== String(value)) field.value = value;
   }
-}
-
-function readinessScore(project) {
-  const fields = ["topic", "population", "concept", "context", "outcomes", "databases", "include", "exclude", "teamPlan"];
-  return Math.round((fields.filter((key) => project[key].length >= 8).length / fields.length) * 100);
-}
-
-function question(project) {
-  const population = project.population || "[population]";
-  const concept = project.concept || "[concept or intervention]";
-  const context = project.context ? ` in ${project.context}` : "";
-  const outcomes = project.outcomes || "[outcomes or evidence signals]";
-  return `Among ${population}${context}, how is ${concept} associated with ${outcomes}?`;
-}
-
-function card(title, score, text, action) {
-  return { title, score, text, action };
-}
-
-function status(scoreOrStatus) {
-  if (typeof scoreOrStatus === "string") return scoreOrStatus;
-  if (scoreOrStatus >= 80) return "steady";
-  if (scoreOrStatus >= 60) return "watch";
-  return "needs";
-}
-
-function labelForStatus(value) {
-  if (value === "steady") return "Ready";
-  if (value === "watch") return "Watch";
-  return "Needs work";
 }
 
 function messageList(title, items, modifier) {

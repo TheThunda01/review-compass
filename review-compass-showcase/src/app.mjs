@@ -12,7 +12,7 @@ import {
   buildSearchString,
   buildSearchTerms,
   buildExtractionRows,
-  computeReadiness,
+  projectFieldSummary,
   defaultProject,
   getDatabase,
   getFramework,
@@ -230,7 +230,7 @@ function renderGuide() {
 
     <section class="gap-board" aria-labelledby="gap-chart-title">
       <div class="board-heading">
-        <p class="surface-label">Common gaps chart</p>
+        <p class="surface-label">Common methods checks</p>
         <h4 id="gap-chart-title">Needs to check before the review grows</h4>
       </div>
       <div class="gap-chart">
@@ -242,9 +242,7 @@ function renderGuide() {
                 <strong>${escapeHtml(gap.gap)}</strong>
                 <p>${escapeHtml(gap.need)}</p>
               </div>
-              <div class="gap-meter" aria-label="${escapeHtml(gap.gap)} score ${gap.score} percent">
-                <meter min="0" max="100" value="${gap.score}">${gap.score}%</meter>
-              </div>
+              <div class="gap-action"><p>${escapeHtml(gap.action)}</p></div>
               <em>${escapeHtml(gap.statusLabel)}</em>
             </article>`
           )
@@ -311,16 +309,15 @@ function renderGuide() {
 }
 
 function renderStatus() {
-  const readiness = computeReadiness(state.project);
-  const readinessGuidance = buildReadinessGuidance(state.project);
+  const completion = projectFieldSummary(state.project);
   const framework = getFramework(state.project.reviewType);
   const sources = getSourceList(state.project);
   const teamPlan = normalizeText(state.project.teamPlan).toLowerCase();
-  const reviewerMode = teamPlan.includes("two") || teamPlan.includes("dual") || teamPlan.includes("independent") ? "Dual" : "Single";
+  const reviewerMode = /\b(?:two|dual|independent)\b/.test(teamPlan) ? "Mentioned" : "Check plan";
 
   projectTitle.textContent = normalizeText(state.project.topic) || "Review plan";
-  readinessScore.textContent = `${readiness}%`;
-  readinessLabel.textContent = readinessGuidance.label;
+  readinessScore.textContent = `${completion.present}/${completion.total}`;
+  readinessLabel.textContent = "fields filled; not validated";
   frameworkLabel.textContent = framework.label;
   sourceCount.textContent = String(sources.length);
   reviewerLabel.textContent = reviewerMode;
@@ -386,10 +383,9 @@ function renderSearch() {
 
 function renderScreening() {
   const result = screenRecord(state.recordText, state.project);
-  const badgeClass = result.decision.toLowerCase();
   screenOutput.innerHTML = `
-    <div class="decision-badge ${badgeClass}">${escapeHtml(result.decision)} with ${escapeHtml(result.confidence.toLowerCase())} confidence</div>
-    <h4>Decision Rationale</h4>
+    <div class="decision-badge review">${escapeHtml(result.status)}</div>
+    <h4>Keyword signals</h4>
     <ul>${result.reasons.map((reason) => `<li>${escapeHtml(reason)}</li>`).join("")}</ul>
     ${
       result.matchedTerms.length

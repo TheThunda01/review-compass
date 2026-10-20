@@ -1,24 +1,25 @@
 {
-  "name": "educator-js-codespace-template",
+  "name": "review-compass",
   "version": "1.0.0",
-  "description": "Educator JS Codespace Template",
+  "description": "A static evidence-review planning and transparent keyword-triage workspace.",
   "source": "src/index.html",
-  "homepage": "https://github.com/microsoft/codespaces-teaching-template-js#readme",
+  "homepage": "https://github.com/TheThunda01/review-compass",
   "scripts": {
     "start": "parcel",
     "build": "parcel build",
     "build-gh": "parcel build --public-url 'https://{github-username}.github.io/{repo-name}'",
     "predeploy": "npm run build-gh",
-    "deploy": "gh-pages -d dist"
+    "deploy": "gh-pages -d dist",
+    "test": "node --test tests/*.test.mjs"
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/microsoft/codespaces-teaching-template-js.git"
+    "url": "git+https://github.com/TheThunda01/review-compass.git"
   },
-  "author": "Microsoft",
-  "license": "ISC",
+  "author": "Brandon J. Huynh; original template by Microsoft",
+  "license": "MIT",
   "bugs": {
-    "url": "https://github.com/microsoft/codespaces-teaching-template-js/issues"
+    "url": "https://github.com/TheThunda01/review-compass/issues"
   },
   "dependencies": {
     "react": "^18.2.0",
