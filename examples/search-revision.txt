@@ -1,0 +1,2 @@
+("college students"[Title/Abstract] OR "university students"[Title/Abstract])
+AND ("food insecurity"[Title/Abstract] OR "food insufficiency"[Title/Abstract] OR "food security"[Title/Abstract])

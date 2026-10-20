@@ -42,3 +42,7 @@ Sources checked on 2026-10-20. The existing template license is retained, and no
 ## Operator-reported search records
 
 `tools/record-search.mjs` adds a standalone custom JSON record pairing query text and input-file fingerprints with required database, platform, date, execution-status, count, and limits fields. It does not execute a search. `draft` requires a null result count; `reported_executed` records the operator's statement, with null still permitted when a count is unknown. A recorded zero is distinct from missing information. The existing structural audit is embedded without treating a flagged query as an invalid historical record. See [practical use](practical-use.md) for exact input bounds, schema, exit codes, and overwrite protection. The browser planner's state and screening behavior are unchanged.
+
+Round 2 adds optional immediate revision linkage: a required reason, predecessor record ID, and exact predecessor-file fingerprint. A revision must be written to a new output path and use a new record ID. Core predecessor fields are validated, but prior source files and older ancestry are not traversed. Existing calls without revision flags produce the same record format. These links describe operator-supplied history, not independent evidence that a search was run.
+
+The revision CLI additionally checks the predecessor query text against its stored UTF-8 SHA-256 before linking. This detects an internally inconsistent record; it does not reconstruct the original metadata-file bytes or authenticate its claims.

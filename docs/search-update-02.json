@@ -1,0 +1,120 @@
+{
+  "search_date": "2026-10-20",
+  "round": 2,
+  "scope": "Immediate predecessor links and explicit reasons for revisions of operator-reported search records; a different implementation question on the same day as round 1.",
+  "inclusion_criteria": [
+    "Direct relevance to the assigned file-integrity or search-history decision",
+    "Primary practice studies and official technical specifications",
+    "Publication dates 2022-01-01 through 2026-10-20; foundational technical specifications retained separately"
+  ],
+  "exclusion_criteria": [
+    "Query-performance experiments without a direct archiving/history focus",
+    "Narrative guidance not needed alongside primary practice and normative provenance sources"
+  ],
+  "searches": [
+    {
+      "source": "PubMed connector",
+      "query": "\"search strategies\"[Title] AND (version*[Title/Abstract] OR reproducib*[Title/Abstract]) AND systematic[Title/Abstract]",
+      "date_from": "2022/01/01",
+      "date_to": "2026/10/20",
+      "date_type": "publication",
+      "sort": "relevance",
+      "offset": 0,
+      "max_results": 10,
+      "max_abstract_chars": 5000,
+      "max_nested_results": 6,
+      "query_translation": "\"search strategies\"[Title] AND (\"version*\"[Title/Abstract] OR \"reproducib*\"[Title/Abstract]) AND \"systematic\"[Title/Abstract] AND 2022/01/01:2026/10/20[Date - Publication]",
+      "total_count": 4,
+      "returned_count": 4,
+      "retrieved_ids": [
+        "39561364",
+        "38052277",
+        "40388051",
+        "38911529"
+      ],
+      "has_more": false,
+      "next_offset": null,
+      "field_pages": [
+        {
+          "offset": 0,
+          "returned_count": 6,
+          "total_count": 15,
+          "next_offset": 6,
+          "has_more": true,
+          "field": "articles.39561364.keywords",
+          "unit": "items"
+        },
+        {
+          "offset": 0,
+          "returned_count": 6,
+          "total_count": 8,
+          "next_offset": 6,
+          "has_more": true,
+          "field": "articles.38052277.authors",
+          "unit": "items"
+        },
+        {
+          "offset": 0,
+          "returned_count": 6,
+          "total_count": 7,
+          "next_offset": 6,
+          "has_more": true,
+          "field": "articles.38911529.keywords",
+          "unit": "items"
+        }
+      ],
+      "limits": "All returned records screened by title and complete abstract; no later result page existed. Truncated author/keyword fields not continued."
+    }
+  ],
+  "screening": [
+    {
+      "id": "39561364",
+      "title": "Added Value of Medical Subject Headings Terms in Search Strategies of Systematic Reviews: Comparative Study.",
+      "decision": "exclude",
+      "reason": "Not needed for the narrow revision-lineage implementation.",
+      "access": "Complete abstract and citation inspected; no full-text appraisal."
+    },
+    {
+      "id": "38052277",
+      "title": "Systematic review search strategies are poorly reported and not reproducible: a cross-sectional metaresearch study.",
+      "decision": "retain_previous",
+      "reason": "Already appraised in round1; retained as context, not a new independent study.",
+      "access": "Complete abstract and citation inspected; no full-text appraisal."
+    },
+    {
+      "id": "40388051",
+      "title": "Search strategies for systematic reviews in reproductive medicine: a narrative review and practical guide.",
+      "decision": "exclude",
+      "reason": "Not needed for the narrow revision-lineage implementation.",
+      "access": "Complete abstract and citation inspected; no full-text appraisal."
+    },
+    {
+      "id": "38911529",
+      "title": "Searches as data: archiving and sharing search strategies using an institutional data repository.",
+      "decision": "include_new",
+      "reason": "Primary institutional search-archiving case directly informs retention of versioned search outputs.",
+      "access": "Complete abstract and citation inspected; no full-text appraisal."
+    }
+  ],
+  "supplementary_lookups": [
+    {
+      "source": "W3C",
+      "url": "https://www.w3.org/TR/2013/REC-prov-o-20130430/#wasRevisionOf",
+      "version": "Recommendation30April2013",
+      "access": "Entity/derivation/revision definitions inspected",
+      "consequence": "Model immediate predecessor as a distinct record; custom JSON does not claim PROV conformance."
+    }
+  ],
+  "counts": {
+    "returned_records": 4,
+    "unique_screened_ids": 4,
+    "new_publications_retained": 1,
+    "prior_publications_reused": 1,
+    "official_sources_inspected": 1
+  },
+  "limits": [
+    "Narrow single-database single-reviewer update with AI assistance; not a systematic review.",
+    "Same calendar date as round1; not evidence of a later surveillance interval.",
+    "No third-party implementation code copied; no external correctness certification."
+  ]
+}

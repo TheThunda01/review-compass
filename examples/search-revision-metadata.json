@@ -1,0 +1,10 @@
+{
+  "recordId": "synthetic-search-002",
+  "database": "Fictional evidence database",
+  "platform": "Synthetic example interface",
+  "searchDate": "2026-10-20",
+  "executionStatus": "draft",
+  "resultCount": null,
+  "limits": "No search was executed. This metadata is an example only.",
+  "notes": "Second synthetic draft adds a teaching synonym. No database search was executed."
+}

@@ -23,6 +23,10 @@ Unknown or missing required fields fail. The output schema is `review-compass-se
 
 Exit `0` means a record was written or printed, even if its query has structural findings. Exit `2` means invalid arguments, encoding, metadata, limits, or an output error. This differs from the standalone audit's exit `1`: a record of a flawed query is still a valid historical record. Use `--output` with a new path; inputs and existing output files are never overwritten. Without it, JSON goes to standard output.
 
+**Round 2, 20 October 2026:** optional `--predecessor PRIOR.json --reason TEXT` links a revision to a supported `review-compass-search-record/1` file of at most 8 MiB. Both flags and `--output NEW.json` are required together. The new `recordId` must differ from the predecessor and its directly visible predecessor, if any. Reason text must be nonblank and at most 10,000 characters; surrounding whitespace is removed.
+
+The optional `revision` block uses schema `review-compass-revision/1` and stores `predecessorRecordId`, `predecessorSha256`, and `reason`. The hash covers the exact predecessor JSON file, including formatting. Its core metadata schema and any immediate revision block are checked before writing. The CLI also recomputes the UTF-8 hash of the stored predecessor query text and requires it to match that record’s query fingerprint. Files named by the predecessor are not opened or checked. Failed validation produces exit 2 without a new record. With no predecessor flags, the previous output is unchanged.
+
 ## Worked use case
 
 ```sh
@@ -30,6 +34,8 @@ node tools/record-search.mjs --query examples/search-draft.txt --metadata exampl
 ```
 
 The bundled metadata is a fictional teaching draft. Its output contains `executionStatus: "draft"` and `resultCount: null`. To document a real run, save the actual submitted query and replace every metadata field with the recorded database context. Select `reported_executed` only if the search was run; `0` then means an explicitly reported zero hits, while `null` remains unknown. Preserve the database export separately. [The included example](../examples/search-record.json) shows the format.
+
+The README revision command adds an explicitly educational synonym and keeps the output marked `draft` with a null result count. [The new fixture](../examples/search-revision.json) points to the unchanged [earlier record](../examples/search-record.json). Re-run the command with a new output path and compare them. Retain both files: an ID alone cannot recover a missing predecessor.
 
 ## Checks before relying on a result
 
@@ -39,13 +45,17 @@ The bundled metadata is a fictional teaching draft. Its output contains `executi
 - Keep query revisions and exports under distinct identifiers, with review decisions and deduplication procedures documented separately.
 - Have an appropriate information specialist or reviewer assess the strategy and inspect known relevant records.
 
+For a revision, compare the stored predecessor digest with the file you intend to retain, read the reason, and check that the change is justified for the actual review. Reformatting a predecessor changes its file fingerprint even if its JSON values are equivalent. The revision's search date is operator metadata, not evidence of when an edit occurred.
+
 ## Known limits
 
 The schema is custom, not a complete PRISMA-S implementation. It does not record every reporting item, authenticate the operator, establish coverage, calculate recall, or deduplicate retrievals. Its date is self-reported. Query syntax and hit counts can change across platforms and over time. The browser planner has not gained a database connector or automated eligibility decision. JSON exports may contain sensitive notes; inspect them before sharing.
 
+This is an immediate link, not a complete revision database. The recorder rejects reuse of IDs visible in the predecessor and its one stored link, but it does not traverse a larger ancestry graph. It cannot detect a missing older revision, a fabricated predecessor, or unsupported claims in an execution field. The original metadata-file byte hash cannot be recomputed from parsed metadata because its original formatting is absent. The pure `linkRevision` helper checks structure; the CLI performs the query-hash comparison. No signature, authenticated history, or database response is created. The browser planner does not yet import these linked records.
+
 ## Next improvements
 
 1. **UI import and export:** expose this same schema in the planner; acceptance means round trips preserve every field and keep draft/executed status visible.
-2. **Multiple search versions:** add explicit predecessor IDs and revision reasons; acceptance means edits never silently replace the recorded earlier query.
+2. **Complete lineage inspection:** accept a collection of predecessor records and check every referenced fingerprint; acceptance means missing ancestors, altered bytes, and cycles are reported without claiming authenticated history.
 3. **Optional retrieval manifests:** fingerprint separately supplied database-export files; acceptance means no record count is inferred from file size or equated with distinct studies.
 4. **User evaluation:** test whether reviewers can reconstruct a supplied search history; acceptance means prespecified usability observations are reported without claims about recall or review quality.

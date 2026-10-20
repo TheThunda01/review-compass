@@ -33,3 +33,27 @@ export function createSearchRecord(metadata, query, fingerprints) {
     unknownCountMeaning: 'null means unknown or not recorded; zero means the operator explicitly reported zero results.'
   };
 }
+
+/** Link an immediate predecessor; this validates structure, not the reported search. */
+export function linkRevision(record, predecessor, predecessorSha256, reason) {
+  if (!record || record.schema !== 'review-compass-search-record/1') throw new Error('Revision must be a supported search record.');
+  createSearchRecord(record.recordedMetadata, record.queryText, record.sourceFingerprints);
+  if (!predecessor || predecessor.schema !== 'review-compass-search-record/1') throw new Error('Predecessor must be a supported search record.');
+  createSearchRecord(predecessor.recordedMetadata, predecessor.queryText, predecessor.sourceFingerprints);
+  if (!/^[a-f0-9]{64}$/.test(predecessorSha256 ?? '')) throw new Error('Predecessor fingerprint must be SHA-256.');
+  if (typeof reason !== 'string' || !reason.trim() || reason.length > 10000) throw new Error('Revision reason must be nonblank text, at most 10,000 characters.');
+  if (record.recordedMetadata.recordId.trim() === predecessor.recordedMetadata.recordId.trim()) throw new Error('A revision must have a new recordId.');
+  if (Object.hasOwn(predecessor, 'revision')) {
+    const old=predecessor.revision;
+    if (!old || typeof old !== 'object' || old.schema !== 'review-compass-revision/1' || typeof old.predecessorRecordId !== 'string' || !old.predecessorRecordId.trim() ||
+        !/^[a-f0-9]{64}$/.test(old.predecessorSha256 ?? '') || typeof old.reason !== 'string' || !old.reason.trim()) throw new Error('Predecessor revision metadata is malformed.');
+    if (record.recordedMetadata.recordId.trim() === old.predecessorRecordId.trim()) throw new Error('Revision would reuse a visible ancestor recordId.');
+  }
+  return {...record, revision: {
+    schema: 'review-compass-revision/1',
+    predecessorRecordId: predecessor.recordedMetadata.recordId,
+    predecessorSha256,
+    reason: reason.trim(),
+    scope: 'Immediate predecessor bytes and operator-declared reason; full ancestry, authorship and search execution are not verified.'
+  }};
+}

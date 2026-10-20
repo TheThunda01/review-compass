@@ -35,6 +35,14 @@ node tools/record-search.mjs --query examples/search-draft.txt --metadata exampl
 
 The metadata fixture is explicitly a synthetic draft. No search is executed. Choose a new output path; existing files are not overwritten.
 
+To preserve a revision as a new file, supply the prior record and a reason:
+
+```sh
+node tools/record-search.mjs --query examples/search-revision.txt --metadata examples/search-revision-metadata.json --predecessor examples/search-record.json --reason "Add a teaching synonym; this remains an unexecuted draft." --output my-search-revision.json
+```
+
+The new record must have a different `recordId`. The predecessor is never rewritten, and a revision requires a new output path.
+
 ## Example results
 
 The [example search record](examples/search-record.json) retains the synthetic query, its SHA-256, a structural audit, and `executionStatus: "draft"` with `resultCount: null`. The app's built-in screening examples all remain **Needs human review**, including apparently relevant text, missing text, and exclusion cues. No recall, precision, or time-saving claim follows from those examples.
@@ -60,6 +68,8 @@ node tools/audit-search.mjs --input examples/search-draft.txt
 It checks quotes, delimiters, empty groups, and selected text hazards. A clean result does not validate the strategy or the database syntax. The planner now also retains concept terms beyond the previous six-term cap, so user-supplied alternatives are not silently omitted.
 
 A search-run record is a handoff format, not a full PRISMA-S report. It does not capture every source, query revision, deduplication procedure, or independent review decision. See the [practical-use contract](docs/practical-use.md) for its fields and failure behavior.
+
+The optional revision block records the immediate predecessor's record ID and exact file SHA-256, plus your reason. It does not prove that the history is complete, authenticate authorship, or verify reported execution. Search dates still describe searches rather than revision timestamps; a corrected historical record can retain its earlier search date.
 
 ## Documentation
 

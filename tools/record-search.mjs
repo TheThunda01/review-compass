@@ -2,17 +2,19 @@ import {readFile, writeFile, stat} from 'node:fs/promises';
 import {basename, resolve} from 'node:path';
 import {createHash} from 'node:crypto';
 import {TextDecoder} from 'node:util';
-import {createSearchRecord} from '../review-compass-showcase/src/searchRecord.mjs';
+import {createSearchRecord, linkRevision} from '../review-compass-showcase/src/searchRecord.mjs';
 import {MAX_QUERY_LENGTH} from '../review-compass-showcase/src/searchAudit.mjs';
 
-const usage='Usage: node tools/record-search.mjs --query query.txt --metadata metadata.json [--output NEW_record.json]';
+const usage='Usage: node tools/record-search.mjs --query query.txt --metadata metadata.json [--output NEW_record.json] [--predecessor prior.json --reason "Reason for revision"]';
 try {
   const args=process.argv.slice(2), options={};
   for(let i=0;i<args.length;i+=2) {
-    if(!['--query','--metadata','--output'].includes(args[i]) || !args[i+1] || Object.hasOwn(options,args[i])) throw new Error(usage);
+    if(!['--query','--metadata','--output','--predecessor','--reason'].includes(args[i]) || !args[i+1] || Object.hasOwn(options,args[i])) throw new Error(usage);
     options[args[i]]=args[i+1];
   }
   if(!options['--query'] || !options['--metadata']) throw new Error(usage);
+  if(Boolean(options['--predecessor']) !== Boolean(options['--reason'])) throw new Error('A predecessor and revision reason must be supplied together.');
+  if(options['--predecessor'] && !options['--output']) throw new Error('A revision requires --output with a new file path.');
   async function readBounded(path, maximum) {
     if((await stat(path)).size>maximum) throw new Error('Input exceeds its documented byte limit.');
     const bytes=await readFile(path);
@@ -23,12 +25,18 @@ try {
   const metadata=await readBounded(options['--metadata'],65536);
   const decode=bytes=>new TextDecoder('utf-8',{fatal:true,ignoreBOM:true}).decode(bytes);
   const digest=bytes=>createHash('sha256').update(bytes).digest('hex');
-  const record=createSearchRecord(JSON.parse(decode(metadata).replace(/^\uFEFF/,'')),decode(query),{
+  let record=createSearchRecord(JSON.parse(decode(metadata).replace(/^\uFEFF/,'')),decode(query),{
     querySha256:digest(query),metadataSha256:digest(metadata),queryFile:basename(options['--query']),metadataFile:basename(options['--metadata'])
   });
+  if(options['--predecessor']) {
+    const previous=await readBounded(options['--predecessor'],8*1024*1024);
+    const predecessor=JSON.parse(decode(previous).replace(/^\uFEFF/,''));
+    if(typeof predecessor?.queryText !== 'string' || digest(Buffer.from(predecessor.queryText,'utf8')) !== predecessor?.sourceFingerprints?.querySha256) throw new Error('Predecessor query text does not match its stored UTF-8 SHA-256.');
+    record=linkRevision(record,predecessor,digest(previous),options['--reason']);
+  }
   const output=JSON.stringify(record,null,2)+'\n';
   if(options['--output']) {
-    if([options['--query'],options['--metadata']].some(p=>resolve(p)===resolve(options['--output']))) throw new Error('Output must not replace an input.');
+    if([options['--query'],options['--metadata'],options['--predecessor']].filter(Boolean).some(p=>resolve(p)===resolve(options['--output']))) throw new Error('Output must not replace an input.');
     await writeFile(options['--output'],output,{encoding:'utf8',flag:'wx'});
   } else process.stdout.write(output);
   // A record with structural findings is still a valid record of a flawed query.

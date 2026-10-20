@@ -1,0 +1,44 @@
+{
+  "schema": "review-compass-search-record/1",
+  "recordedMetadata": {
+    "recordId": "synthetic-search-002",
+    "database": "Fictional evidence database",
+    "platform": "Synthetic example interface",
+    "searchDate": "2026-10-20",
+    "executionStatus": "draft",
+    "resultCount": null,
+    "limits": "No search was executed. This metadata is an example only.",
+    "notes": "Second synthetic draft adds a teaching synonym. No database search was executed."
+  },
+  "queryText": "(\"college students\"[Title/Abstract] OR \"university students\"[Title/Abstract])\nAND (\"food insecurity\"[Title/Abstract] OR \"food insufficiency\"[Title/Abstract] OR \"food security\"[Title/Abstract])\n",
+  "sourceFingerprints": {
+    "querySha256": "fa212442e5768d451d0ccbf11e6334da95f4c16c23c921522f493802dba3cb6f",
+    "metadataSha256": "d56d65f370dacdb67fbe2f019187de51af272cc64edbc01cfbd65d4f07c2d918",
+    "queryFile": "search-revision.txt",
+    "metadataFile": "search-revision-metadata.json"
+  },
+  "structuralAudit": {
+    "schemaVersion": 1,
+    "status": "No listed structural issue detected",
+    "characterCount": 193,
+    "offsetConvention": "zero-based UTF-16 code units",
+    "closedQuotedPhrases": 5,
+    "maximumParenthesisDepth": 1,
+    "manualReviewRequired": true,
+    "issues": [],
+    "limitations": [
+      "Not a database parser: Boolean grammar, field tags, limits, controlled vocabulary, and phrase handling are not validated.",
+      "No search was submitted. Retrieval counts, recall, precision, and scientific coverage are unknown.",
+      "Inspect the exact query in its target platform and arrange appropriate peer review."
+    ]
+  },
+  "interpretation": "Operator-reported metadata. Review Compass did not execute the search, verify its result count, evaluate recall, or determine eligibility.",
+  "unknownCountMeaning": "null means unknown or not recorded; zero means the operator explicitly reported zero results.",
+  "revision": {
+    "schema": "review-compass-revision/1",
+    "predecessorRecordId": "synthetic-search-001",
+    "predecessorSha256": "9bfae2bc3dd25645cf142322a497f6639a87df641c08cdb71d56b1b02ccb5585",
+    "reason": "Add a teaching synonym; this remains an unexecuted draft.",
+    "scope": "Immediate predecessor bytes and operator-declared reason; full ancestry, authorship and search execution are not verified."
+  }
+}
