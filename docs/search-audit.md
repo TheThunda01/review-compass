@@ -22,7 +22,7 @@ The bundled text is a synthetic teaching draft, not a validated literature searc
 - Nonempty text and closed ASCII double quotes.
 - Matched, correctly nested parentheses and square brackets outside quoted text.
 - Empty quoted phrases and empty parenthesis groups.
-- Curly double quotes, backslashes, and non-printing control characters that warrant manual inspection.
+- Curly double quotes, backslashes, and selected ASCII control characters that warrant manual inspection. Tabs and line endings are allowed.
 
 Offsets are zero-based UTF-16 code units. Quotes toggle quoted text; backslash escaping is not interpreted. Punctuation inside quoted phrases is not treated as a structural delimiter. Diagnostics are deliberately lexical: the scanner does not know whether a field tag, phrase, operator, proximity expression, or other construct is supported by the target database. Empty-group checks are only applied outside quotes.
 
