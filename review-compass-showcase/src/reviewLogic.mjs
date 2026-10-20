@@ -187,7 +187,7 @@ export function buildSearchTerms(project) {
   const type = project.reviewType;
   const groups = [];
   const add = (label, value) => {
-    const terms = unique(splitList(value).flatMap((term) => [term, ...(SYNONYMS.get(term.toLowerCase()) ?? [])])).slice(0, 6);
+    const terms = unique(splitList(value).flatMap((term) => [term, ...(SYNONYMS.get(term.toLowerCase()) ?? [])]));
     if (terms.length) groups.push({ label, terms });
   };
   if (type === "realist") {

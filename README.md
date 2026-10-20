@@ -1,5 +1,7 @@
 # Review Compass
 
+[Understand the evidence-review concepts](docs/biology-and-concepts.md), including question framing, Boolean searching, records versus studies, and the limits of automated checks.
+
 **[Start here: project background, purpose, and key themes](docs/project-context.md).**
 
 Review Compass is a browser-based workspace for turning a review idea into a draft plan. It helps organize a question, eligibility criteria, search terms, extraction fields, and reporting notes before you discuss the methods with a librarian, mentor, or research team.
@@ -28,6 +30,16 @@ The planner shows how many fields contain text and whether certain words were me
 Keyword matching recognizes complete words and literal phrases. It can show “animal study” even in “this was not an animal study,” because it does not interpret negation or context. It also misses relevant synonyms that are not in your configured phrases. These limitations are visible in the app and export. [Methods and limitations](docs/methods-and-limitations.md) explain the behavior and its rationale.
 
 The manual search checklist reports checked boxes, not independently verified work. The flow calculator checks arithmetic relationships in entered counts; it cannot establish that the records, reports, and studies were counted correctly.
+
+## Inspect a search draft
+
+The standalone [search checker](docs/search-audit.md) records the input fingerprint and flags a small set of structural issues without sending the query anywhere:
+
+```sh
+node tools/audit-search.mjs --input examples/search-draft.txt
+```
+
+It checks quotes, delimiters, empty groups, and selected text hazards. A clean result does not validate the strategy or the database syntax. The planner now also retains concept terms beyond the previous six-term cap, so user-supplied alternatives are not silently omitted.
 
 ## Run the tests
 

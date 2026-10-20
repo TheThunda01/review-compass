@@ -1,0 +1,17 @@
+{
+  "inputFile": "search-draft.txt",
+  "inputSha256": "18fbca0c6ffe38705523d69d71e4725885a03e2b37735c54d52a9f0c795034b3",
+  "schemaVersion": 1,
+  "status": "No listed structural issue detected",
+  "characterCount": 158,
+  "offsetConvention": "zero-based UTF-16 code units",
+  "closedQuotedPhrases": 4,
+  "maximumParenthesisDepth": 1,
+  "manualReviewRequired": true,
+  "issues": [],
+  "limitations": [
+    "Not a database parser: Boolean grammar, field tags, limits, controlled vocabulary, and phrase handling are not validated.",
+    "No search was submitted. Retrieval counts, recall, precision, and scientific coverage are unknown.",
+    "Inspect the exact query in its target platform and arrange appropriate peer review."
+  ]
+}
