@@ -5,7 +5,7 @@
   "source": "src/index.html",
   "homepage": "https://github.com/TheThunda01/review-compass",
   "scripts": {
-    "start": "parcel",
+    "start": "parcel --host 127.0.0.1 --no-cors --no-hmr",
     "build": "parcel build",
     "build-gh": "parcel build --public-url 'https://{github-username}.github.io/{repo-name}'",
     "predeploy": "npm run build-gh",
