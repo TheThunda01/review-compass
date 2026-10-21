@@ -1,3 +1,8 @@
+> Historical upstream template instructions. The text below describes the original
+> React portfolio, not the active Review Compass application. Its dependency and
+> deployment configuration remains available in Git history. Use the current
+> [README](README.md) to run Review Compass; it has no build step or npm dependencies.
+
 [![Open in GitHub Codespaces](https://github.com/codespaces/badge.svg)](https://github.com/codespaces/new?hide_repo_select=true&ref=main&repo=526682619)
 
 # JavaScript Portfolio Site with GitHub Codespaces and Copilot

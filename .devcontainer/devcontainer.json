@@ -1,17 +1,14 @@
 // For format details, see https://aka.ms/devcontainer.json. For config options, see the README at:
 // https://github.com/devcontainers/images/tree/main/src/javascript-node
 {
-  "name": "JavaScript Portfolio Site with GitHub Codespaces",
+  "name": "Review Compass static workspace",
   "image": "mcr.microsoft.com/devcontainers/universal:2",
   "hostRequirements": {
     "cpus": 4
   },
-  "waitFor": "onCreateCommand",
-  "updateContentCommand": "npm install",
-  "postCreateCommand": "",
-  "postAttachCommand": {
-    "server": "npm start"
-  },
+  "waitFor": "postCreateCommand",
+  "updateContentCommand": "npm ci --ignore-scripts",
+  "postCreateCommand": "npm test",
 
   // Configure tool-specific properties.
   "customizations": {
@@ -19,11 +16,7 @@
     "vscode": {
       // Add the IDs of extensions you want installed when the container is created.
       "extensions": [
-        "dbaeumer.vscode-eslint",
-        "esbenp.prettier-vscode",
-        "GitHub.copilot",
-        "ms-vscode.azure-account",
-        "ms-azuretools.vscode-azurestaticwebapps"
+        "GitHub.copilot"
       ],
       "settings": {
         "emmet.includeLanguages": {
@@ -35,16 +28,16 @@
   },
 
   "features": {
-    "ghcr.io/devcontainers/features/github-cli:1": {},
-    "ghcr.io/devcontainers/features/azure-cli:1": {}
+    "ghcr.io/devcontainers/features/node:1": {"version": "22"},
+    "ghcr.io/devcontainers/features/python:1": {"version": "3.12"}
   },
 
   "portsAttributes": {
-    "1234": {
-      "label": "Application",
+    "8000": {
+      "label": "Review Compass (start the README server manually)",
       "onAutoForward": "openPreview"
     }
   },
 
-  "forwardPorts": [1234]
+  "forwardPorts": [8000]
 }

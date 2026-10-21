@@ -10,7 +10,7 @@ Review Compass helps organize a review question, eligibility rules, search terms
 
 An evidence review brings sources together to answer a question; eligibility rules say which sources belong. The working app is in [`review-compass-showcase/`](review-compass-showcase/). It includes a planner, educational method pages, a manual search checklist, a record-count calculator, and a Markdown export. The page uses HyperText Markup Language (HTML), Cascading Style Sheets (CSS), and JavaScript in your browser; no model, inference service, or database search runs behind it.
 
-The command-line interface (CLI), used through a terminal, inspects query structure and now create a portable **operator-reported search record** pairing exact query text and input fingerprints with an operator's database, platform, date, limits, and result count. Drafts remain drafts; unknown counts remain `null`. A recorded count is not independently verified.
+The command-line interface (CLI), used through a terminal, inspects query structure and creates a portable **operator-reported search record** pairing exact query text and input fingerprints with an operator's database, platform, date, limits, and result count. Drafts remain drafts; unknown counts remain `null`. A recorded count is not independently verified.
 
 ## Quick start
 
@@ -79,6 +79,7 @@ The optional revision block records the immediate predecessor's record ID and ex
 | [Assumptions](docs/assumptions.md) | Rationale, checks, and consequences of each material assumption |
 | [Reference list](docs/references.md) | Complete citations and the role of each source |
 | [Reference audit](docs/reference-audit.json) | Source checks, access levels, and remaining limitations |
+| [Maintenance and source review](docs/review-2026-10-21.md) | Static-tool cleanup, source checks, validation, and remaining limits |
 | [Editorial review](docs/review-2026-10-20.md) | Corrections and checks completed on October 20, 2026 |
 | [Project context](docs/project-context.md) | Background, rationale, and themes |
 | [Biology and concepts](docs/biology-and-concepts.md) | Evidence-review concepts and boundaries |
@@ -91,16 +92,14 @@ The optional revision block records the immediate predecessor's record ID and ex
 
 ## Development and reuse
 
-### Legacy template development server
+### Static application and development tools
 
-The optional root-template server uses `npm start` and serves on
-<http://127.0.0.1:1234/>. It binds only to the local loopback interface and disables
-cross-origin response access. Hot reload is also disabled to prevent a
-cross-origin WebSocket from receiving source updates; refresh the page manually
-after edits. These defaults keep the development server off the local network
-and disable permissive cross-origin HTTP access and hot-reload sockets. Keep
-these options when starting Parcel directly. This legacy server builds `src/`;
-the Review Compass app is served separately using the quick-start command above.
+The application is the existing HTML, CSS, and JavaScript in
+`review-compass-showcase/`. Serve those files with the Python command in the quick
+start; no bundling, npm dependency installation, or build step is required.
+The root npm package is a dependency-free test entry point, so `npm test` is an
+alternative to the Node command below. The dev container runs the tests and leaves
+starting the local server to you.
 
 ### Run the tests
 
@@ -125,6 +124,6 @@ The 2025 ASReview citation concerns version 2; its current repository advertises
 
 The static app does not send entered text to a server. When served from `localhost` or `127.0.0.1` (or opened as a local file if the browser permits storage), the planner may save project text, record text, and notes in browser local storage so they survive a reload. On other hosts, those fields use tab memory. Exports contain your entered information, so inspect them before sharing. The manual audit and flow inputs use in-memory state.
 
-This repository began with Microsoft's JavaScript portfolio template. The original instructions are preserved in [`TEMPLATE_ORIGIN.md`](TEMPLATE_ORIGIN.md), and the unused root `src/` directory and legacy build dependencies remain as historical template material. They are not the Review Compass entry point. The inherited MIT license and attribution are retained. The Spanish and Portuguese files under `translations/`, and inherited Microsoft support, conduct, and pull-request instructions, belong to that template; they are not translations, contacts, or support commitments for Review Compass. Use this repository’s issue tracker for reproducible non-sensitive project bugs and the [security policy](SECURITY.md) to report suspected vulnerabilities privately; do not post private records or credentials. No source code was copied from PRISMA-S or ASReview.
+This repository began with Microsoft's JavaScript portfolio template. The original instructions are preserved in [`TEMPLATE_ORIGIN.md`](TEMPLATE_ORIGIN.md), and the unused root `src/` directory remains as historical template material. Its React/Parcel dependency and deployment configuration is available in Git history; it is no longer installed by the active root package. The inherited MIT license and attribution are retained. The Spanish and Portuguese files under `translations/`, and inherited Microsoft support, conduct, and pull-request instructions, belong to that template; they are not translations, contacts, or support commitments for Review Compass. Use this repository’s issue tracker for reproducible non-sensitive project bugs and the [security policy](SECURITY.md) to report suspected vulnerabilities privately; do not post private records or credentials. No source code was copied from PRISMA-S or ASReview.
 
 The [rapid practice review](docs/literature-review.md) records the sources behind the new search handoff format. Its fields were written for this project; no third-party search or screening code was copied.
