@@ -29,10 +29,10 @@ const FRAMES = {
 };
 
 const RATIONALES = {
-  PICO: "PICO keeps the question specific enough to support eligibility criteria, structured searching, and transparent synthesis.",
+  PICO: "PICO makes population, intervention, comparison, and outcome choices explicit. It does not require a narrow review or adding every element to a search.",
   PCC: "PCC keeps a broad review organized around the population, concept, and setting while still allowing evidence mapping.",
-  PICOS: "PICOS keeps an umbrella review focused on the population, intervention or exposure, outcomes, and review-level designs.",
-  SPIDER: "SPIDER is helpful for qualitative evidence because it makes the sample, phenomenon, design, evaluation, and research type visible.",
+  PICOS: "PICOS is one possible way to organize an umbrella review. Define eligible review designs and overlapping primary studies separately.",
+  SPIDER: "SPIDER makes the sample, phenomenon, design, evaluation, and research type visible. It is a proposed aid, not a universally superior search method.",
   "PICO/PCC": "A mixed-methods review often needs both outcome logic and context logic so different evidence types stay aligned.",
   "Topic map": "A topic map clarifies the boundaries of a broad explanatory synthesis.",
   CMO: "CMO fits realist reviews because the goal is to explain how and why something works in particular contexts."
@@ -46,15 +46,15 @@ const DATABASES = {
 };
 
 const MATRIX = [
-  ["systematic", "Answering a focused question with explicit eligibility criteria.", "PICO", "Transparent synthesis, often with risk-of-bias appraisal.", "Avoid using it for a broad evidence landscape that is not ready for one precise question."],
-  ["scoping", "Mapping what evidence exists, how a field is defined, and where gaps remain.", "PCC", "Evidence map, concept summary, and future research directions.", "Do not treat it like a guideline-making review unless appraisal and synthesis plans support that."],
+  ["systematic", "Answering a clearly specified question with explicit eligibility criteria.", "PICO or a question-appropriate frame", "Transparent synthesis with appraisal suited to the evidence.", "Broad and narrow scopes are both possible; justify the purpose and feasibility."],
+  ["scoping", "Mapping what evidence exists, how a field is defined, and where gaps remain.", "PCC", "Evidence map, concept summary, and future research directions.", "A descriptive map alone does not establish treatment effects or support a practice recommendation."],
   ["rapid", "Answering a time-sensitive question while documenting every shortcut.", "PICO", "Streamlined synthesis with stated limits and confidence tradeoffs.", "Shortcuts must be named because they can affect completeness and bias."],
-  ["meta-analysis", "Pooling comparable quantitative outcomes across similar studies.", "PICO", "Effect estimates, heterogeneity summary, and sensitivity checks.", "Do not pool results just because numbers exist; outcomes and designs need to be compatible."],
-  ["umbrella", "Comparing findings from existing systematic reviews or meta-analyses.", "PICOS", "Review-of-reviews summary with overlap and certainty notes.", "Keep review-level conclusions separate from primary-study details."],
+  ["meta-analysis", "Statistically combining compatible results; an analysis method within a review.", "PICO", "Effect estimates, heterogeneity summary, and sensitivity checks.", "Do not pool results just because numbers exist; outcomes and designs need to be compatible."],
+  ["umbrella", "Comparing findings from existing systematic reviews or meta-analyses.", "PICOS", "Review-of-reviews summary with overlap and certainty notes.", "Keep review-level conclusions separate from primary-study details and account for overlapping studies."],
   ["mapping", "Showing where evidence clusters across categories, settings, or populations.", "PCC", "Visual map, category counts, and gap table.", "Use stable charting categories after piloting a sample of records."],
   ["qualitative", "Synthesizing experiences, meanings, perceptions, or implementation themes.", "SPIDER", "Themes, concepts, and confidence in qualitative findings.", "Keep participant voice, author interpretation, and reviewer interpretation distinct."],
   ["mixed-methods", "Integrating quantitative outcomes with qualitative explanations.", "PICO/PCC", "Integrated synthesis showing convergence, divergence, and gaps.", "Plan integration early so one evidence type does not quietly dominate."],
-  ["integrative", "Combining diverse empirical, theoretical, or practice-based sources.", "PCC", "Broad synthesis of patterns across evidence types.", "Define eligible source types carefully so the review does not become arbitrary."],
+  ["integrative", "Combining diverse empirical or theoretical sources.", "Question-specific frame", "Broad synthesis of patterns across evidence types.", "Define eligible source types carefully so the review does not become arbitrary."],
   ["narrative", "Explaining a broad topic, history, or theory when systematic searching is not the main claim.", "Topic map", "Thematic explanation with transparent source-selection logic.", "Be honest about source selection so readers do not confuse it with a systematic review."],
   ["realist", "Explaining how and why an intervention or program works in particular contexts.", "CMO", "Program theory built from context, mechanism, and outcome patterns.", "The method needs iterative theory refinement, not only a list of study results."]
 ];
@@ -125,9 +125,13 @@ export function getFramework(reviewType) {
     questionStyle,
     rationale: RATIONALES[label],
     reportingLead:
-      reviewType === "scoping" || reviewType === "mapping"
-        ? "Identify the report clearly and use PRISMA-ScR and PRISMA-S when reporting."
-        : "Identify the report clearly and use PRISMA 2020 and PRISMA-S when reporting."
+      reviewType === "scoping"
+        ? "Identify the scoping review clearly and use PRISMA-ScR; consult PRISMA-S for search reporting."
+        : reviewType === "realist"
+          ? "Use the RAMESES standards for realist synthesis and explain the iterative search and theory-development process."
+          : ["narrative", "integrative", "qualitative", "mapping"].includes(reviewType)
+            ? "Name the actual synthesis method and select its reporting guidance. PRISMA-ScR applies to scoping reviews, not automatically to every evidence map; a narrative review is not automatically a PRISMA review."
+            : "Use PRISMA 2020 where applicable, with guidance specific to the chosen synthesis method; consult PRISMA-S for search reporting."
   };
 }
 
@@ -223,6 +227,7 @@ export function buildSearchNotes(project, databaseKey = "pubmed") {
   const sourceText = getSourceList(project).length ? getSourceList(project).join(", ") : "the planned databases and sources";
   return [
     { tone: "standard", title: "Search documentation", text: `Record the exact ${database.label} search, the date searched, applied filters, platform name, and number of records retrieved.` },
+    { tone: "warning", title: "Illustrative draft", text: "This builder joins every generated concept block with AND and uses text terms only. Outcome, context, or method blocks can exclude relevant studies. Review related terms individually, add suitable controlled vocabulary, and test syntax in the named platform before use." },
     { tone: "standard", title: "Source coverage", text: `Check whether ${sourceText} cover the main literature for the field, and add registries, citation searching, or grey literature when the review question needs them.` },
     { tone: "warning", title: "Limits and restrictions", text: "Use date, language, geography, or publication-type limits only when the protocol explains why they are needed and what they could miss." },
     { tone: "warning", title: "Peer review", text: "Ask a librarian, mentor, or experienced reviewer to check Boolean logic, field tags, controlled vocabulary, and missing synonyms before treating the search as final." }
@@ -373,7 +378,7 @@ export function screenRecord(recordText, project) {
 
 export function buildSubmissionCopy(project) {
   const description =
-    "Review Compass is a student-friendly app that helps students plan evidence reviews, from systematic and scoping reviews to rapid, umbrella, mapping, qualitative, mixed-methods, integrative, narrative, realist, and meta-analysis projects. It turns a rough topic into a review-type guide, structured question, search drafts, keyword triage for human review, extraction fields, gap checks, project notes, and a reporting checklist. Grounded in PRISMA, PRISMA-S, PRISMA-ScR, Cochrane, JBI, and review-method guidance.";
+    "Review Compass is a student-friendly app that helps students plan evidence reviews, from systematic and scoping reviews to rapid, umbrella, mapping, qualitative, mixed-methods, integrative, narrative, realist, and meta-analysis projects. It turns a rough topic into a review-type guide, structured question, search drafts, keyword triage for human review, extraction fields, gap checks, project notes, and a reporting checklist. Its prompts draw on reporting and review-method guidance; it does not certify compliance or perform a systematic review.";
   const sources = getSourceList(project);
   return {
     title: "Review Compass",

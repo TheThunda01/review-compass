@@ -1,5 +1,7 @@
 # Practical use
 
+Terminology: [glossary](glossary.md). For assumptions and their limits, see [assumptions](assumptions.md).
+
 ## Where this fits
 
 Review Compass fits at the planning and documentation stages of a review. Its browser app helps articulate a question and inspect literal search or screening cues. Its new standalone recorder helps keep the text of a search with the context reported by the person who ran it. It does not submit that search or verify a database response.
@@ -49,7 +51,7 @@ For a revision, compare the stored predecessor digest with the file you intend t
 
 ## Known limits
 
-The schema is custom, not a complete PRISMA-S implementation. It does not record every reporting item, authenticate the operator, establish coverage, calculate recall, or deduplicate retrievals. Its date is self-reported. Query syntax and hit counts can change across platforms and over time. The browser planner has not gained a database connector or automated eligibility decision. JSON exports may contain sensitive notes; inspect them before sharing.
+The schema is custom, not a complete PRISMA-S implementation. It does not record every reporting item, authenticate the operator, establish coverage, calculate recall, or deduplicate retrievals. Its date is self-reported. Query syntax and hit counts can change across platforms and over time. The browser planner has not gained a database connector or automated eligibility decision. Its flow calculator assumes one retained record per sought report; it does not reconcile records with documents or distinct studies. Its search builder combines all generated blocks with AND, so outcome or context blocks may exclude useful evidence. JSON exports may contain sensitive notes; inspect them before sharing.
 
 This is an immediate link, not a complete revision database. The recorder rejects reuse of IDs visible in the predecessor and its one stored link, but it does not traverse a larger ancestry graph. It cannot detect a missing older revision, a fabricated predecessor, or unsupported claims in an execution field. The original metadata-file byte hash cannot be recomputed from parsed metadata because its original formatting is absent. The pure `linkRevision` helper checks structure; the CLI performs the query-hash comparison. No signature, authenticated history, or database response is created. The browser planner does not yet import these linked records.
 

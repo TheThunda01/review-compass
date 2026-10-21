@@ -1,0 +1,743 @@
+{
+  "review_date": "2026-10-20",
+  "scope": "Authored active documentation and UI; substantive sources in retained dated research notes. Screening-only search hits and inherited Microsoft-template tutorials are historical material, not scientific citations supporting this project.",
+  "limits": [
+    "This is a targeted reference and editorial audit, not an exhaustive systematic review.",
+    "Current access levels are recorded per source. Historical search logs and their access descriptions are preserved.",
+    "Official software feature pages are descriptions, not independent evidence of efficacy."
+  ],
+  "references": [
+    {
+      "id": "pmid-33499930",
+      "source_type": "peer_reviewed_article",
+      "title": "PRISMA-S: an extension to the PRISMA Statement for Reporting Literature Searches in Systematic Reviews.",
+      "authors": "Melissa L Rethlefsen et al.",
+      "year": 2021,
+      "url": "https://doi.org/10.1186/s13643-020-01542-z",
+      "pmid": "33499930",
+      "doi": "10.1186/s13643-020-01542-z",
+      "journal": "Systematic reviews",
+      "volume": "10",
+      "issue": "1",
+      "pages": "39",
+      "checked_on": "2026-10-20",
+      "access_level": "abstract",
+      "metadata_status": "verified",
+      "supported_claims": [
+        "PRISMA-S specifies search-reporting items; it does not validate a search or this app."
+      ],
+      "limitations": [
+        "Current appraisal used the PubMed abstract, not the full article or supplements.",
+        "Consensus reporting guideline, not a performance trial."
+      ],
+      "corrections": [],
+      "alternate_urls": [
+        "https://pubmed.ncbi.nlm.nih.gov/33499930/"
+      ]
+    },
+    {
+      "id": "pmid-40926967",
+      "source_type": "peer_reviewed_article",
+      "title": "ASReview LAB v.2: Open-source text screening with multiple agents and a crowd of experts.",
+      "authors": "Jonathan de Bruin et al.",
+      "year": 2025,
+      "url": "https://doi.org/10.1016/j.patter.2025.101318",
+      "pmid": "40926967",
+      "doi": "10.1016/j.patter.2025.101318",
+      "journal": "Patterns (New York, N.Y.)",
+      "volume": "6",
+      "issue": "7",
+      "pages": "101318",
+      "checked_on": "2026-10-20",
+      "access_level": "abstract",
+      "metadata_status": "verified",
+      "supported_claims": [
+        "ASReview LAB v.2 describes model-assisted collaborative text screening."
+      ],
+      "limitations": [
+        "Current appraisal used the PubMed abstract, not the full article or supplements.",
+        "Version 2 paper is historical context; current repository advertises version 3. No performance inheritance."
+      ],
+      "corrections": [],
+      "alternate_urls": [
+        "https://pubmed.ncbi.nlm.nih.gov/40926967/"
+      ]
+    },
+    {
+      "id": "pmid-33782057",
+      "source_type": "peer_reviewed_article",
+      "title": "The PRISMA 2020 statement: an updated guideline for reporting systematic reviews.",
+      "authors": "Matthew J Page et al.",
+      "year": 2021,
+      "url": "https://doi.org/10.1136/bmj.n71",
+      "pmid": "33782057",
+      "doi": "10.1136/bmj.n71",
+      "journal": "BMJ (Clinical research ed.)",
+      "volume": "372",
+      "issue": null,
+      "pages": "n71",
+      "checked_on": "2026-10-20",
+      "access_level": "abstract",
+      "metadata_status": "verified",
+      "supported_claims": [
+        "PRISMA 2020 is reporting guidance, with checklists and flow diagrams."
+      ],
+      "limitations": [
+        "Current appraisal used the PubMed abstract, not the full article or supplements.",
+        "Reporting completeness alone does not establish unbiased review conduct."
+      ],
+      "corrections": [],
+      "alternate_urls": [
+        "https://pubmed.ncbi.nlm.nih.gov/33782057/"
+      ]
+    },
+    {
+      "id": "pmid-30178033",
+      "source_type": "peer_reviewed_article",
+      "title": "PRISMA Extension for Scoping Reviews (PRISMA-ScR): Checklist and Explanation.",
+      "authors": "Andrea C Tricco et al.",
+      "year": 2018,
+      "url": "https://doi.org/10.7326/M18-0850",
+      "pmid": "30178033",
+      "doi": "10.7326/M18-0850",
+      "journal": "Annals of internal medicine",
+      "volume": "169",
+      "issue": "7",
+      "pages": "467-473",
+      "checked_on": "2026-10-20",
+      "access_level": "abstract",
+      "metadata_status": "verified",
+      "supported_claims": [
+        "PRISMA-ScR provides 20 essential and two optional scoping-review reporting items."
+      ],
+      "limitations": [
+        "Current appraisal used the PubMed abstract, not the full article or supplements.",
+        "Reporting guidance is not a substitute for a scoping-review method."
+      ],
+      "corrections": [],
+      "alternate_urls": [
+        "https://pubmed.ncbi.nlm.nih.gov/30178033/"
+      ]
+    },
+    {
+      "id": "pmid-27005575",
+      "source_type": "peer_reviewed_article",
+      "title": "PRESS Peer Review of Electronic Search Strategies: 2015 Guideline Statement.",
+      "authors": "Jessie McGowan et al.",
+      "year": 2016,
+      "url": "https://doi.org/10.1016/j.jclinepi.2016.01.021",
+      "pmid": "27005575",
+      "doi": "10.1016/j.jclinepi.2016.01.021",
+      "journal": "Journal of clinical epidemiology",
+      "volume": "75",
+      "issue": null,
+      "pages": "40-6",
+      "checked_on": "2026-10-20",
+      "access_level": "abstract",
+      "metadata_status": "verified",
+      "supported_claims": [
+        "PRESS recommends structured peer review of strategy concepts, operators, vocabulary, syntax and limits."
+      ],
+      "limitations": [
+        "Current appraisal used the PubMed abstract, not the full article or supplements.",
+        "No validation of the project’s limited structural scanner."
+      ],
+      "corrections": [],
+      "alternate_urls": [
+        "https://pubmed.ncbi.nlm.nih.gov/27005575/"
+      ]
+    },
+    {
+      "id": "pmid-38052277",
+      "source_type": "peer_reviewed_article",
+      "title": "Systematic review search strategies are poorly reported and not reproducible: a cross-sectional metaresearch study.",
+      "authors": "Melissa L Rethlefsen et al.",
+      "year": 2024,
+      "url": "https://doi.org/10.1016/j.jclinepi.2023.111229",
+      "pmid": "38052277",
+      "doi": "10.1016/j.jclinepi.2023.111229",
+      "journal": "Journal of clinical epidemiology",
+      "volume": "166",
+      "issue": null,
+      "pages": "111229",
+      "checked_on": "2026-10-20",
+      "access_level": "abstract",
+      "metadata_status": "verified",
+      "supported_claims": [
+        "Searches in a sampled set of reviews often lacked reporting detail or were not reproducible under the study definition."
+      ],
+      "limitations": [
+        "Current appraisal used the PubMed abstract, not the full article or supplements.",
+        "One review sample and operational definition; no estimate of Review Compass effectiveness."
+      ],
+      "corrections": [],
+      "alternate_urls": [
+        "https://pubmed.ncbi.nlm.nih.gov/38052277/"
+      ]
+    },
+    {
+      "id": "pmid-39176233",
+      "source_type": "peer_reviewed_article",
+      "title": "Searching and reporting in Campbell Collaboration systematic reviews: A systematic assessment of current methods.",
+      "authors": "Sarah Young et al.",
+      "year": 2024,
+      "url": "https://doi.org/10.1002/cl2.1432",
+      "pmid": "39176233",
+      "doi": "10.1002/cl2.1432",
+      "journal": "Campbell systematic reviews",
+      "volume": "20",
+      "issue": "3",
+      "pages": "e1432",
+      "checked_on": "2026-10-20",
+      "access_level": "abstract",
+      "metadata_status": "verified",
+      "supported_claims": [
+        "Reporting of search methods varied among 111 Campbell reviews."
+      ],
+      "limitations": [
+        "Current appraisal used the PubMed abstract, not the full article or supplements.",
+        "Collection-specific assessment; reporting is not retrieval sensitivity or precision."
+      ],
+      "corrections": [],
+      "alternate_urls": [
+        "https://pubmed.ncbi.nlm.nih.gov/39176233/"
+      ]
+    },
+    {
+      "id": "pmid-38911529",
+      "source_type": "peer_reviewed_article",
+      "title": "Searches as data: archiving and sharing search strategies using an institutional data repository.",
+      "authors": "Alisa B Rod, Jill T Boruff",
+      "year": 2024,
+      "url": "https://doi.org/10.5195/jmla.2024.1791",
+      "pmid": "38911529",
+      "doi": "10.5195/jmla.2024.1791",
+      "journal": "Journal of the Medical Library Association : JMLA",
+      "volume": "112",
+      "issue": "1",
+      "pages": "42-47",
+      "checked_on": "2026-10-20",
+      "access_level": "abstract",
+      "metadata_status": "verified",
+      "supported_claims": [
+        "An institutional case describes archiving searches with metadata."
+      ],
+      "limitations": [
+        "Current appraisal used the PubMed abstract, not the full article or supplements.",
+        "Single institutional workflow, not causal evidence of benefit from this recorder."
+      ],
+      "corrections": [],
+      "alternate_urls": [
+        "https://pubmed.ncbi.nlm.nih.gov/38911529/"
+      ]
+    },
+    {
+      "id": "pmid-33076832",
+      "source_type": "peer_reviewed_article",
+      "title": "Development, testing and use of data extraction forms in systematic reviews: a review of methodological guidance.",
+      "authors": "Roland Brian Büchter, Alina Weise, Dawid Pieper",
+      "year": 2020,
+      "url": "https://doi.org/10.1186/s12874-020-01143-3",
+      "pmid": "33076832",
+      "doi": "10.1186/s12874-020-01143-3",
+      "journal": "BMC medical research methodology",
+      "volume": "20",
+      "issue": "1",
+      "pages": "259",
+      "checked_on": "2026-10-20",
+      "access_level": "abstract",
+      "metadata_status": "verified",
+      "supported_claims": [
+        "A review of 25 guidance documents describes recommendations for tailored forms, instructions, piloting and multiple extractors."
+      ],
+      "limitations": [
+        "Current appraisal used the PubMed abstract, not the full article or supplements.",
+        "Counts summarize recommendations, not evidence that a particular form prevents errors."
+      ],
+      "corrections": [],
+      "alternate_urls": [
+        "https://pubmed.ncbi.nlm.nih.gov/33076832/"
+      ]
+    },
+    {
+      "id": "pmid-31019390",
+      "source_type": "peer_reviewed_article",
+      "title": "Errors in search strategies used in systematic reviews and their effects on information retrieval.",
+      "authors": "José Antonio Salvador-Oliván, Gonzalo Marco-Cuenca, Rosario Arquero-Avilés",
+      "year": 2019,
+      "url": "https://doi.org/10.5195/jmla.2019.567",
+      "pmid": "31019390",
+      "doi": "10.5195/jmla.2019.567",
+      "journal": "Journal of the Medical Library Association : JMLA",
+      "volume": "107",
+      "issue": "2",
+      "pages": "210-221",
+      "checked_on": "2026-10-20",
+      "access_level": "abstract",
+      "metadata_status": "verified",
+      "supported_claims": [
+        "Search errors were frequent in 137 sampled reviews using MEDLINE/PubMed."
+      ],
+      "limitations": [
+        "Current appraisal used the PubMed abstract, not the full article or supplements.",
+        "Sample-specific results; cannot infer the project’s recall or error prevention."
+      ],
+      "corrections": [],
+      "alternate_urls": [
+        "https://pubmed.ncbi.nlm.nih.gov/31019390/"
+      ]
+    },
+    {
+      "id": "pmid-40914296",
+      "source_type": "peer_reviewed_article",
+      "title": "Overview of evidence synthesis types and modes.",
+      "authors": "Barbara Nussbaumer-Streit et al.",
+      "year": 2025,
+      "url": "https://doi.org/10.1016/j.jclinepi.2025.111970",
+      "pmid": "40914296",
+      "doi": "10.1016/j.jclinepi.2025.111970",
+      "journal": "Journal of clinical epidemiology",
+      "volume": "187",
+      "issue": null,
+      "pages": "111970",
+      "checked_on": "2026-10-20",
+      "access_level": "abstract",
+      "metadata_status": "verified",
+      "supported_claims": [
+        "Evidence-synthesis purposes differ; rapid and living approaches are modes that can apply to different synthesis types."
+      ],
+      "limitations": [
+        "Current appraisal used the PubMed abstract, not the full article or supplements.",
+        "Overview article; used for terminology, not comparative effectiveness."
+      ],
+      "corrections": [],
+      "alternate_urls": [
+        "https://pubmed.ncbi.nlm.nih.gov/40914296/"
+      ]
+    },
+    {
+      "id": "pmid-22829486",
+      "source_type": "peer_reviewed_article",
+      "title": "Beyond PICO: the SPIDER tool for qualitative evidence synthesis.",
+      "authors": "Alison Cooke, Debbie Smith, Andrew Booth",
+      "year": 2012,
+      "url": "https://doi.org/10.1177/1049732312452938",
+      "pmid": "22829486",
+      "doi": "10.1177/1049732312452938",
+      "journal": "Qualitative health research",
+      "volume": "22",
+      "issue": "10",
+      "pages": "1435-43",
+      "checked_on": "2026-10-20",
+      "access_level": "abstract",
+      "metadata_status": "verified",
+      "supported_claims": [
+        "SPIDER names Sample, Phenomenon of Interest, Design, Evaluation and Research type."
+      ],
+      "limitations": [
+        "Current appraisal used the PubMed abstract, not the full article or supplements.",
+        "The original paper explicitly calls for wider refinement and testing; no universally best framework is established."
+      ],
+      "corrections": [],
+      "alternate_urls": [
+        "https://pubmed.ncbi.nlm.nih.gov/22829486/"
+      ]
+    },
+    {
+      "id": "pmid-16268861",
+      "source_type": "peer_reviewed_article",
+      "title": "The integrative review: updated methodology.",
+      "authors": "Robin Whittemore, Kathleen Knafl",
+      "year": 2005,
+      "url": "https://doi.org/10.1111/j.1365-2648.2005.03621.x",
+      "pmid": "16268861",
+      "doi": "10.1111/j.1365-2648.2005.03621.x",
+      "journal": "Journal of advanced nursing",
+      "volume": "52",
+      "issue": "5",
+      "pages": "546-53",
+      "checked_on": "2026-10-20",
+      "access_level": "abstract",
+      "metadata_status": "verified",
+      "supported_claims": [
+        "Integrative reviews may combine diverse empirical and theoretical material."
+      ],
+      "limitations": [
+        "Current appraisal used the PubMed abstract, not the full article or supplements.",
+        "Methods proposal in a nursing context; no mandatory PCC frame is established."
+      ],
+      "corrections": [],
+      "alternate_urls": [
+        "https://pubmed.ncbi.nlm.nih.gov/16268861/"
+      ]
+    },
+    {
+      "id": "pmid-23360677",
+      "source_type": "peer_reviewed_article",
+      "title": "RAMESES publication standards: realist syntheses.",
+      "authors": "Geoff Wong et al.",
+      "year": 2013,
+      "url": "https://doi.org/10.1186/1741-7015-11-21",
+      "pmid": "23360677",
+      "doi": "10.1186/1741-7015-11-21",
+      "journal": "BMC medicine",
+      "volume": "11",
+      "issue": null,
+      "pages": "21",
+      "checked_on": "2026-10-20",
+      "access_level": "abstract",
+      "metadata_status": "verified",
+      "supported_claims": [
+        "Realist synthesis develops explanations about context, mechanisms and outcomes; RAMESES supplies reporting standards."
+      ],
+      "limitations": [
+        "Current appraisal used the PubMed abstract, not the full article or supplements.",
+        "Reporting standards, not evidence that a short CMO prompt performs a realist synthesis."
+      ],
+      "corrections": [],
+      "alternate_urls": [
+        "https://pubmed.ncbi.nlm.nih.gov/23360677/"
+      ]
+    },
+    {
+      "id": "cochrane-05",
+      "source_type": "official_documentation",
+      "title": "Chapter 5: Collecting data",
+      "authors": "Li T, Higgins JPT, Deeks JJ",
+      "year": 2024,
+      "url": "https://www.cochrane.org/authors/handbooks-and-manuals/handbook/current/chapter-05",
+      "checked_on": "2026-10-20",
+      "access_level": "official_documentation",
+      "metadata_status": "verified",
+      "supported_claims": [
+        "Studies and reports are distinct; extraction should retain their relationships.",
+        "Structured, piloted forms and planned handling of disagreements support transparent extraction."
+      ],
+      "limitations": [
+        "Chapter last updated October 2019; handbook citation is version 6.5 (2024). Guidance does not evaluate either project."
+      ],
+      "corrections": [],
+      "version": "6.5"
+    },
+    {
+      "id": "cochrane-14",
+      "source_type": "official_documentation",
+      "title": "Chapter 14: Completing Summary of findings tables and grading the certainty of the evidence",
+      "authors": "Schünemann HJ et al.",
+      "year": 2024,
+      "url": "https://www.cochrane.org/authors/handbooks-and-manuals/handbook/current/chapter-14",
+      "checked_on": "2026-10-20",
+      "access_level": "official_documentation",
+      "metadata_status": "verified",
+      "supported_claims": [
+        "GRADE evaluates certainty by outcome across a body of evidence; populated cells do not establish certainty."
+      ],
+      "limitations": [
+        "Chapter last updated August 2023; guidance is for intervention evidence, not a software quality score."
+      ],
+      "corrections": [],
+      "version": "6.5"
+    },
+    {
+      "id": "asreview-repository",
+      "source_type": "official_documentation",
+      "title": "ASReview LAB repository",
+      "authors": "ASReview developers",
+      "year": null,
+      "url": "https://github.com/asreview/asreview",
+      "checked_on": "2026-10-20",
+      "access_level": "official_documentation",
+      "metadata_status": "verified",
+      "supported_claims": [
+        "The project implements model-assisted prioritization using human screening labels."
+      ],
+      "limitations": [
+        "Repository README advertised version 3 when checked; the cited 2025 paper evaluates version 2. No code or performance is transferred to these projects."
+      ],
+      "corrections": [],
+      "version": "README accessed 2026-10-20"
+    },
+    {
+      "id": "cochrane-02",
+      "source_type": "official_documentation",
+      "title": "Chapter 2: Determining the scope of the review and the questions it will address",
+      "authors": "Thomas J et al.",
+      "year": 2024,
+      "url": "https://www.cochrane.org/authors/handbooks-and-manuals/handbook/current/chapter-02",
+      "checked_on": "2026-10-20",
+      "access_level": "official_documentation",
+      "metadata_status": "corrected",
+      "supported_claims": [
+        "Systematic reviews can have broad or narrow questions; purpose and feasibility guide scope."
+      ],
+      "limitations": [
+        "Chapter updated August 2023."
+      ],
+      "corrections": [
+        "Removed the false rule that a broad question cannot suit a systematic review."
+      ],
+      "version": "6.5"
+    },
+    {
+      "id": "cochrane-03",
+      "source_type": "official_documentation",
+      "title": "Chapter 3: Defining the criteria for including studies and how they will be grouped for the synthesis",
+      "authors": "McKenzie JE et al.",
+      "year": 2024,
+      "url": "https://www.cochrane.org/authors/handbooks-and-manuals/handbook/current/chapter-03",
+      "checked_on": "2026-10-20",
+      "access_level": "official_documentation",
+      "metadata_status": "corrected",
+      "supported_claims": [
+        "Plan eligibility and synthesis together; outcome reporting should not routinely be an inclusion requirement."
+      ],
+      "limitations": [
+        "Chapter updated August 2023; context is intervention reviews."
+      ],
+      "corrections": [
+        "Clarified that a missing reported outcome is not automatically grounds for exclusion."
+      ],
+      "version": "6.5"
+    },
+    {
+      "id": "cochrane-04",
+      "source_type": "official_documentation",
+      "title": "Chapter 4: Searching for and selecting studies",
+      "authors": "Lefebvre C et al.",
+      "year": 2025,
+      "url": "https://www.cochrane.org/authors/handbooks-and-manuals/handbook/current/chapter-04",
+      "checked_on": "2026-10-20",
+      "access_level": "official_documentation",
+      "metadata_status": "verified",
+      "supported_claims": [
+        "Use appropriate information sources, text terms and subject headings, and retain search details; consult an information specialist."
+      ],
+      "limitations": [
+        "Chapter updated March 2025; handbook citation is 6.5.1, unlike several other chapters."
+      ],
+      "corrections": [],
+      "version": "6.5.1"
+    },
+    {
+      "id": "cochrane-08",
+      "source_type": "official_documentation",
+      "title": "Chapter 8: Assessing risk of bias in a randomized trial",
+      "authors": "Higgins JPT et al.",
+      "year": 2024,
+      "url": "https://www.cochrane.org/authors/handbooks-and-manuals/handbook/current/chapter-08",
+      "checked_on": "2026-10-20",
+      "access_level": "official_documentation",
+      "metadata_status": "verified",
+      "supported_claims": [
+        "RoB 2 assesses specific randomized-trial results using domain judgments and written reasons."
+      ],
+      "limitations": [
+        "Chapter updated October 2019; not an appraisal tool for every study design."
+      ],
+      "corrections": [],
+      "version": "6.5"
+    },
+    {
+      "id": "cochrane-10",
+      "source_type": "official_documentation",
+      "title": "Chapter 10: Analysing data and undertaking meta-analyses",
+      "authors": "Deeks JJ et al.",
+      "year": 2024,
+      "url": "https://www.cochrane.org/authors/handbooks-and-manuals/handbook/current/chapter-10",
+      "checked_on": "2026-10-20",
+      "access_level": "official_documentation",
+      "metadata_status": "verified",
+      "supported_claims": [
+        "Meta-analysis statistically combines results; compatibility, bias and heterogeneity require judgment."
+      ],
+      "limitations": [
+        "Chapter updated November 2024; the app performs no meta-analysis."
+      ],
+      "corrections": [],
+      "version": "6.5"
+    },
+    {
+      "id": "cochrane-handbook",
+      "source_type": "official_documentation",
+      "title": "Cochrane Handbook for Systematic Reviews of Interventions",
+      "authors": "Cochrane",
+      "year": null,
+      "url": "https://www.cochrane.org/authors/handbooks-and-manuals/handbook/current",
+      "checked_on": "2026-10-20",
+      "access_level": "official_documentation",
+      "metadata_status": "verified",
+      "supported_claims": [
+        "Entry point for chapter-specific intervention-review guidance."
+      ],
+      "limitations": [
+        "Consult chapter-specific versions above rather than assigning one date to every chapter."
+      ],
+      "corrections": []
+    },
+    {
+      "id": "prisma-2020-site",
+      "source_type": "official_documentation",
+      "title": "PRISMA 2020 resources",
+      "authors": "PRISMA Executive",
+      "year": null,
+      "url": "https://www.prisma-statement.org/prisma-2020",
+      "checked_on": "2026-10-20",
+      "access_level": "official_documentation",
+      "metadata_status": "verified",
+      "supported_claims": [
+        "Official site provides checklists, flow templates and links to the statement and explanation."
+      ],
+      "limitations": [],
+      "corrections": []
+    },
+    {
+      "id": "prisma-search-site",
+      "source_type": "official_documentation",
+      "title": "PRISMA-Search resources",
+      "authors": "PRISMA Executive",
+      "year": null,
+      "url": "https://www.prisma-statement.org/prisma-search",
+      "checked_on": "2026-10-20",
+      "access_level": "official_documentation",
+      "metadata_status": "verified",
+      "supported_claims": [
+        "Official page links the 2021 PRISMA-S statement and search-reporting resources."
+      ],
+      "limitations": [],
+      "corrections": []
+    },
+    {
+      "id": "prisma-scr-site",
+      "source_type": "official_documentation",
+      "title": "PRISMA-Scoping Reviews resources",
+      "authors": "PRISMA Executive",
+      "year": null,
+      "url": "https://www.prisma-statement.org/scoping",
+      "checked_on": "2026-10-20",
+      "access_level": "official_documentation",
+      "metadata_status": "verified",
+      "supported_claims": [
+        "Official site provides the 2018 extension and scoping-review checklist."
+      ],
+      "limitations": [],
+      "corrections": []
+    },
+    {
+      "id": "jbi-online",
+      "source_type": "official_documentation",
+      "title": "JBI Manual for Evidence Synthesis",
+      "authors": "JBI",
+      "year": null,
+      "url": "https://jbi-global.atlassian.net/wiki/spaces/MANUAL/overview",
+      "checked_on": "2026-10-20",
+      "access_level": "official_documentation",
+      "metadata_status": "verified",
+      "supported_claims": [
+        "JBI covers multiple forms of evidence synthesis; online chapters can change between PDF editions."
+      ],
+      "limitations": [
+        "Only the overview and cited question section were inspected in this review."
+      ],
+      "corrections": [],
+      "version": "Online manual accessed 2026-10-20"
+    },
+    {
+      "id": "jbi-question",
+      "source_type": "official_documentation",
+      "title": "10.2.3 Defining and aligning the objective/s and question/s",
+      "authors": "JBI; page attributed to Carolyn Phillips",
+      "year": null,
+      "url": "https://jbi-global.atlassian.net/wiki/spaces/MANUAL/pages/355862687/10.2.3+Defining+and+aligning+the+objective+s+and+question+s",
+      "checked_on": "2026-10-20",
+      "access_level": "official_documentation",
+      "metadata_status": "verified",
+      "supported_claims": [
+        "JBI suggests PCC for scoping questions and aligning objectives, questions and methods."
+      ],
+      "limitations": [
+        "Page displays Aug 27 without a year; no publication year is inferred."
+      ],
+      "corrections": []
+    },
+    {
+      "id": "pubmed-help",
+      "source_type": "official_documentation",
+      "title": "PubMed User Guide",
+      "authors": "National Library of Medicine",
+      "year": 2026,
+      "url": "https://pubmed.ncbi.nlm.nih.gov/help/",
+      "checked_on": "2026-10-20",
+      "access_level": "official_documentation",
+      "metadata_status": "verified",
+      "supported_claims": [
+        "Phrase, field-tag and automatic term-mapping behavior is platform-specific."
+      ],
+      "limitations": [
+        "Relevant search sections inspected; guide updated September 30, 2026."
+      ],
+      "corrections": [],
+      "version": "Updated 2026-09-30"
+    },
+    {
+      "id": "prov-o",
+      "source_type": "official_documentation",
+      "title": "PROV-O: The PROV Ontology",
+      "authors": "Lebo T, Sahoo S, McGuinness D, editors; W3C",
+      "year": 2013,
+      "url": "https://www.w3.org/TR/2013/REC-prov-o-20130430/",
+      "checked_on": "2026-10-20",
+      "access_level": "official_documentation",
+      "metadata_status": "verified",
+      "supported_claims": [
+        "wasRevisionOf represents a revision relation between entities."
+      ],
+      "limitations": [
+        "Custom JSON is not RDF or a PROV-O implementation; a relation alone does not authenticate history."
+      ],
+      "corrections": [],
+      "version": "W3C Recommendation 2013-04-30"
+    },
+    {
+      "id": "cochrane-rapid",
+      "source_type": "official_documentation",
+      "title": "Cochrane rapid review methods guidance",
+      "authors": "Cochrane Rapid Reviews Methods Group",
+      "year": 2024,
+      "url": "https://methods.cochrane.org/rapidreviews/cochrane-rr-methods",
+      "checked_on": "2026-10-20",
+      "access_level": "official_documentation",
+      "metadata_status": "verified",
+      "supported_claims": [
+        "Links updated guidance for rapid reviews of effectiveness."
+      ],
+      "limitations": [
+        "Guidance is specific to review purpose; rapid is not a license to omit unreported steps."
+      ],
+      "corrections": []
+    },
+    {
+      "id": "rapid-2024",
+      "source_type": "peer_reviewed_article",
+      "title": "Updated recommendations for the Cochrane rapid review methods guidance for rapid reviews of effectiveness",
+      "authors": "Garritty C et al.",
+      "year": 2024,
+      "url": "https://doi.org/10.1136/bmj-2023-076335",
+      "checked_on": "2026-10-20",
+      "access_level": "metadata_only",
+      "metadata_status": "verified",
+      "supported_claims": [
+        "Current official rapid-review resource points to this guidance."
+      ],
+      "limitations": [
+        "PubMed metadata and official resource inspected; no PubMed abstract was available and the full paper was not read."
+      ],
+      "corrections": [],
+      "doi": "10.1136/bmj-2023-076335",
+      "pmid": "38320771",
+      "journal": "BMJ",
+      "volume": "384",
+      "issue": null,
+      "pages": "e076335"
+    }
+  ]
+}

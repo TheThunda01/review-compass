@@ -1,5 +1,7 @@
 # Inspect an exact search draft
 
+Terminology: [glossary](glossary.md). For assumptions and their limits, see [assumptions](assumptions.md).
+
 The standalone checker helps catch a narrow set of structural problems before a query is reviewed in its target database. It accepts a UTF-8 text file and produces JSON containing the exact input file's SHA-256, diagnostics, and explicit limitations. It does not contact any external service.
 
 From the repository root, with Node.js 22 or later:
@@ -32,4 +34,4 @@ If an issue is flagged, return to the query and investigate it; the program does
 
 The planner's concept builder now retains all supplied terms after case-insensitive deduplication. Its previous six-term cap could silently omit a seventh term and later entries. Tests cover this regression. The built-in suggested alternatives are still educational suggestions that require review; they are not an ontology, a validated synonym set, or a complete database search.
 
-[PRESS](https://doi.org/10.1016/j.jclinepi.2016.01.021) motivates careful peer review of the broader search strategy. [PRISMA-S](https://doi.org/10.1186/s13643-020-01542-z) motivates recording enough detail to understand and reproduce the search. Neither guideline validates this implementation. Code is original; no code from a search engine or screening package was copied.
+[McGowan et al. (2016): PRESS](https://doi.org/10.1016/j.jclinepi.2016.01.021) motivates careful peer review of the broader search strategy. [Rethlefsen et al. (2021): PRISMA-S](https://doi.org/10.1186/s13643-020-01542-z) motivates recording enough detail to understand and reproduce the search. Neither guideline validates this implementation. Code is original; no code from a search engine or screening package was copied.

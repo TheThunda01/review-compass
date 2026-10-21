@@ -200,7 +200,7 @@ function flowModel(counts) {
   const reportsAssessed = Math.max(0, reportsSought - input.reportsNotRetrieved);
   const reportsIncluded = Math.max(0, reportsAssessed - input.reportsExcluded);
   const problems = [];
-  const cautions = [];
+  const cautions = ["This simplified flow assumes one retained record corresponds to one report and combines source pathways. Reconcile record-to-report links separately; it does not establish a complete PRISMA flow."];
 
   if (recordsIdentified === 0) problems.push("Add at least one record source before using the flow summary.");
   if (removed > recordsIdentified) problems.push("Records removed before screening cannot exceed records identified.");

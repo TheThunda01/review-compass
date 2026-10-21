@@ -8,9 +8,9 @@ Review Compass helps organize a review question, eligibility rules, search terms
 
 ## What it does
 
-The working app is in [`review-compass-showcase/`](review-compass-showcase/). It includes a planner, educational method pages, a manual search checklist, a record-count calculator, and a Markdown export. Ordinary HTML, CSS, and JavaScript run locally; no model, inference service, or database search runs behind it.
+An evidence review brings sources together to answer a question; eligibility rules say which sources belong. The working app is in [`review-compass-showcase/`](review-compass-showcase/). It includes a planner, educational method pages, a manual search checklist, a record-count calculator, and a Markdown export. The page uses HyperText Markup Language (HTML), Cascading Style Sheets (CSS), and JavaScript in your browser; no model, inference service, or database search runs behind it.
 
-The command-line tools inspect query structure and now create a portable **search-run record** pairing exact query text and input fingerprints with an operator's database, platform, date, limits, and result count. Drafts remain drafts; unknown counts remain `null`. A recorded count is not independently verified.
+The command-line interface (CLI), used through a terminal, inspects query structure and now create a portable **operator-reported search record** pairing exact query text and input fingerprints with an operator's database, platform, date, limits, and result count. Drafts remain drafts; unknown counts remain `null`. A recorded count is not independently verified.
 
 ## Quick start
 
@@ -45,7 +45,7 @@ The new record must have a different `recordId`. The predecessor is never rewrit
 
 ## Example results
 
-The [example search record](examples/search-record.json) retains the synthetic query, its SHA-256, a structural audit, and `executionStatus: "draft"` with `resultCount: null`. The app's built-in screening examples all remain **Needs human review**, including apparently relevant text, missing text, and exclusion cues. No recall, precision, or time-saving claim follows from those examples.
+The [example search record](examples/search-record.json) retains the synthetic query, its SHA-256 fingerprint of exact file bytes, a structural audit, and `executionStatus: "draft"` with `resultCount: null`. The app's built-in screening examples all remain **Needs human review**, including apparently relevant text, missing text, and exclusion cues. No recall, precision, or time-saving claim follows from those examples.
 
 ## Practical use and limitations
 
@@ -67,7 +67,7 @@ node tools/audit-search.mjs --input examples/search-draft.txt
 
 It checks quotes, delimiters, empty groups, and selected text hazards. A clean result does not validate the strategy or the database syntax. The planner now also retains concept terms beyond the previous six-term cap, so user-supplied alternatives are not silently omitted.
 
-A search-run record is a handoff format, not a full PRISMA-S report. It does not capture every source, query revision, deduplication procedure, or independent review decision. See the [practical-use contract](docs/practical-use.md) for its fields and failure behavior.
+An operator-reported search record is a handoff format, not a full PRISMA-S report. It does not capture every source, query revision, deduplication procedure, or independent review decision. See the [practical-use contract](docs/practical-use.md) for its fields and failure behavior.
 
 The optional revision block records the immediate predecessor's record ID and exact file SHA-256, plus your reason. It does not prove that the history is complete, authenticate authorship, or verify reported execution. Search dates still describe searches rather than revision timestamps; a corrected historical record can retain its earlier search date.
 
@@ -75,6 +75,11 @@ The optional revision block records the immediate predecessor's record ID and ex
 
 | Page | Purpose |
 | --- | --- |
+| [Glossary](docs/glossary.md) | Definitions of scientific, statistical, and software terms |
+| [Assumptions](docs/assumptions.md) | Rationale, checks, and consequences of each material assumption |
+| [Reference list](docs/references.md) | Complete citations and the role of each source |
+| [Reference audit](docs/reference-audit.json) | Source checks, access levels, and remaining limitations |
+| [Editorial review](docs/review-2026-10-20.md) | Corrections and checks completed on October 20, 2026 |
 | [Project context](docs/project-context.md) | Background, rationale, and themes |
 | [Biology and concepts](docs/biology-and-concepts.md) | Evidence-review concepts and boundaries |
 | [Methods and limitations](docs/methods-and-limitations.md) | Literal matching and planning semantics |
@@ -100,15 +105,15 @@ The tests cover relevant and empty records, absent keywords, negation, exclusion
 
 The project uses published reporting guidance as a reference for planning prompts. PRISMA-S supports transparent reporting of search methods; it does not validate this app or convert a checklist into a measure of review quality. An established research tool such as ASReview LAB uses trained models and reviewer labels for a different screening workflow. This app neither implements that system nor claims comparable performance.
 
-- Rethlefsen ML, et al. (2021). PRISMA-S: an extension to the PRISMA Statement for Reporting Literature Searches in Systematic Reviews. *Systematic Reviews*, 10, 39. [doi:10.1186/s13643-020-01542-z](https://doi.org/10.1186/s13643-020-01542-z).
-- de Bruin J, et al. (2025). ASReview LAB v.2: Open-source text screening with multiple agents and a crowd of experts. *Patterns*, 6(7), 101318. [doi:10.1016/j.patter.2025.101318](https://doi.org/10.1016/j.patter.2025.101318).
+- Rethlefsen ML et al. (2021). PRISMA-S: an extension to the PRISMA Statement for Reporting Literature Searches in Systematic Reviews. *Systematic Reviews*, 10, 39. [Rethlefsen et al. (2021): doi:10.1186/s13643-020-01542-z](https://doi.org/10.1186/s13643-020-01542-z).
+- de Bruin J et al. (2025). ASReview LAB v.2: Open-source text screening with multiple agents and a crowd of experts. *Patterns*, 6(7), 101318. [doi:10.1016/j.patter.2025.101318](https://doi.org/10.1016/j.patter.2025.101318).
 
-The [in-app reference page](review-compass-showcase/references.html) includes the broader educational sources. No sensitivity, specificity, recall, reliability, or time-saving estimate has been established for Review Compass.
+The 2025 ASReview citation concerns version 2; its current repository advertises version 3. Results and capabilities must be attributed to the evaluated version. The [in-app reference page](review-compass-showcase/references.html) includes the broader educational sources. No sensitivity, specificity, recall, reliability, or time-saving estimate has been established for Review Compass.
 
 ### Data handling and repository history
 
-The static app does not send entered text to a server. When served from `localhost` or `127.0.0.1`, the planner may save project text, record text, and notes in browser local storage so they survive a reload. On other hosts, those fields use tab memory. Exports contain your entered information, so inspect them before sharing. The manual audit and flow inputs use in-memory state.
+The static app does not send entered text to a server. When served from `localhost` or `127.0.0.1` (or opened as a local file if the browser permits storage), the planner may save project text, record text, and notes in browser local storage so they survive a reload. On other hosts, those fields use tab memory. Exports contain your entered information, so inspect them before sharing. The manual audit and flow inputs use in-memory state.
 
-This repository began with Microsoft's JavaScript portfolio template. The original instructions are preserved in [`TEMPLATE_ORIGIN.md`](TEMPLATE_ORIGIN.md), and the unused root `src/` directory and legacy build dependencies remain as historical template material. They are not the Review Compass entry point. The inherited MIT license and attribution are retained. No source code was copied from PRISMA-S or ASReview.
+This repository began with Microsoft's JavaScript portfolio template. The original instructions are preserved in [`TEMPLATE_ORIGIN.md`](TEMPLATE_ORIGIN.md), and the unused root `src/` directory and legacy build dependencies remain as historical template material. They are not the Review Compass entry point. The inherited MIT license and attribution are retained. The Spanish and Portuguese files under `translations/`, and inherited Microsoft support, security, conduct, and pull-request instructions, belong to that template; they are not translations, contacts, or support commitments for Review Compass. Use this repository’s issue tracker for reproducible non-sensitive project bugs; do not post private records or credentials. No source code was copied from PRISMA-S or ASReview.
 
 The [rapid practice review](docs/literature-review.md) records the sources behind the new search handoff format. Its fields were written for this project; no third-party search or screening code was copied.

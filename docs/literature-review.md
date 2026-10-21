@@ -1,5 +1,7 @@
 # Rapid literature and practice review
 
+Terminology: [glossary](glossary.md). For assumptions and their limits, see [assumptions](assumptions.md).
+
 ## Question and scope
 
 What should accompany a saved search query so another reviewer can understand its context and distinguish a draft from a reported database run? This bounded review informed an operator-reported search-record format. It did not evaluate Review Compass's effectiveness or seek a complete inventory of search software.

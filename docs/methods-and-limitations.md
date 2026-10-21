@@ -1,5 +1,7 @@
 # How the planner's checks work
 
+Terminology: [glossary](glossary.md). For assumptions and their limits, see [assumptions](assumptions.md).
+
 The planner is an educational drafting aid. Its useful output is a more explicit question, a reviewable set of method choices, and visible reasons to investigate a record. It cannot establish that a review is complete or that a record meets the protocol.
 
 ## Keyword triage
@@ -12,6 +14,10 @@ The matcher does not understand negation, infer meaning, expand synonyms during 
 
 The interface and Markdown export use the same result. The export identifies the words found and preserves the limitations; it does not silently convert signals into decisions.
 
+## Search drafts
+
+The builder combines every generated concept block with AND and uses text terms, not controlled vocabulary. Its predefined related terms are suggestions, not verified synonyms. Requiring an outcome, context, or method block can miss relevant reports. The chosen database changes the printed field syntax, but the app does not execute or validate it. Review each block with an information specialist and test the exact query in the target platform. Cochrane’s search guidance discusses why too many required concepts can reduce sensitivity (Lefebvre et al., 2025; [references](references.md#cochrane-04)).
+
 ## Planning fields and method prompts
 
 The `x/9` indicator counts nonempty project fields. It measures text entry only. A single character counts as entered text, so the indicator does not reward verbosity or imply that a long answer is scientifically adequate.
@@ -20,13 +26,13 @@ The common-methods checks report observations such as “pilot wording mentioned
 
 For compatibility with earlier callers, `computeReadiness` still returns a numeric percentage, but that value is explicitly the fraction of nonempty fields. It is not displayed as scientific readiness. `screenRecord` keeps its name and arguments, while its former `decision` and `confidence` properties have been intentionally removed. Consumers must read `status`, `signals`, and the explanations instead.
 
-The manual search audit is different: its completed-box count comes from the user's own checks. That count is not independently verified, and all boxes checked still calls for human review. The record-flow arithmetic uses user-entered counts; a numerically consistent flow can still describe incorrectly counted records or reports.
+The manual search audit is different: its completed-box count comes from the user's own checks. That count is not independently verified, and all boxes checked still calls for human review. The record-flow arithmetic uses user-entered counts; a numerically consistent flow can still describe incorrectly counted records or reports. It assumes one retained record corresponds to one sought report and combines the database and other-source pathways. Reconcile records with reports outside the app; the display is not a complete PRISMA 2020 flow diagram.
 
 ## Relationship to published methods
 
-[PRISMA-S](https://doi.org/10.1186/s13643-020-01542-z) is reporting guidance for searches, including source/platform details, full strategies, dates, limits, record counts, and deduplication. Those topics inform the app's prompts. The paper does not validate these software checks or prescribe a readiness percentage.
+[Rethlefsen et al. (2021): PRISMA-S](https://doi.org/10.1186/s13643-020-01542-z) is reporting guidance for searches, including source/platform details, full strategies, dates, limits, record counts, and deduplication. Those topics inform the app's prompts. The paper does not validate these software checks or prescribe a readiness percentage.
 
-[ASReview LAB v.2](https://doi.org/10.1016/j.patter.2025.101318) describes an open-source system for model-assisted screening with human expertise. It is an example of a substantially different, evaluated research workflow. Review Compass does not train a model, prioritize a record collection, implement active learning, or inherit the performance reported for ASReview. The citation is context and a comparison, not a claim that its code or validation applies here.
+[de Bruin et al. (2025): ASReview LAB v.2](https://doi.org/10.1016/j.patter.2025.101318) describes an open-source system for model-assisted screening with human expertise. It is an example of a substantially different, evaluated research workflow. Review Compass does not train a model, prioritize a record collection, implement active learning, or inherit the performance reported for ASReview. The citation is context and a comparison, not a claim that its code or validation applies here.
 
 No new literature-review outcome or empirical screening-performance estimate is reported by this project. The built-in examples illustrate interaction with the planner. A research team would need a protocol-specific labeled evaluation, appropriate error analysis, and decisions about oversight before using any automated screen for consequential record selection.
 
