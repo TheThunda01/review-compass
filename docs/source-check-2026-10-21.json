@@ -1,0 +1,21 @@
+{
+  "date": "2026-10-21",
+  "checks": [
+    {
+      "id": "pmid-33499930",
+      "url": "https://link.springer.com/article/10.1186/s13643-020-01542-z",
+      "access": "full text, checklist and explanation of database/platform/strategy reporting",
+      "finding": "PRISMA-S provides 16 reporting items. The local record implements a subset and does not validate search coverage, execution or study selection."
+    },
+    {
+      "id": "cochrane-05",
+      "url": "https://www.cochrane.org/authors/handbooks-and-manuals/handbook/current/chapter-05",
+      "access": "official handbook, extraction and reconciliation guidance",
+      "finding": "Supports planned human extraction/reconciliation; no completion count or literal keyword signal certifies review quality."
+    }
+  ],
+  "limits": [
+    "No new systematic literature search or independent biological validation.",
+    "Availability of an archive record does not establish the correctness of its measurements."
+  ]
+}
