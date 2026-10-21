@@ -91,6 +91,17 @@ The optional revision block records the immediate predecessor's record ID and ex
 
 ## Development and reuse
 
+### Legacy template development server
+
+The optional root-template server uses `npm start` and serves on
+<http://127.0.0.1:1234/>. It binds only to the local loopback interface and disables
+cross-origin response access. Hot reload is also disabled to prevent a
+cross-origin WebSocket from receiving source updates; refresh the page manually
+after edits. These defaults keep the development server off the local network
+and disable permissive cross-origin HTTP access and hot-reload sockets. Keep
+these options when starting Parcel directly. This legacy server builds `src/`;
+the Review Compass app is served separately using the quick-start command above.
+
 ### Run the tests
 
 With Node.js 22 or later:
@@ -114,6 +125,6 @@ The 2025 ASReview citation concerns version 2; its current repository advertises
 
 The static app does not send entered text to a server. When served from `localhost` or `127.0.0.1` (or opened as a local file if the browser permits storage), the planner may save project text, record text, and notes in browser local storage so they survive a reload. On other hosts, those fields use tab memory. Exports contain your entered information, so inspect them before sharing. The manual audit and flow inputs use in-memory state.
 
-This repository began with Microsoft's JavaScript portfolio template. The original instructions are preserved in [`TEMPLATE_ORIGIN.md`](TEMPLATE_ORIGIN.md), and the unused root `src/` directory and legacy build dependencies remain as historical template material. They are not the Review Compass entry point. The inherited MIT license and attribution are retained. The Spanish and Portuguese files under `translations/`, and inherited Microsoft support, security, conduct, and pull-request instructions, belong to that template; they are not translations, contacts, or support commitments for Review Compass. Use this repository’s issue tracker for reproducible non-sensitive project bugs; do not post private records or credentials. No source code was copied from PRISMA-S or ASReview.
+This repository began with Microsoft's JavaScript portfolio template. The original instructions are preserved in [`TEMPLATE_ORIGIN.md`](TEMPLATE_ORIGIN.md), and the unused root `src/` directory and legacy build dependencies remain as historical template material. They are not the Review Compass entry point. The inherited MIT license and attribution are retained. The Spanish and Portuguese files under `translations/`, and inherited Microsoft support, conduct, and pull-request instructions, belong to that template; they are not translations, contacts, or support commitments for Review Compass. Use this repository’s issue tracker for reproducible non-sensitive project bugs and the [security policy](SECURITY.md) to report suspected vulnerabilities privately; do not post private records or credentials. No source code was copied from PRISMA-S or ASReview.
 
 The [rapid practice review](docs/literature-review.md) records the sources behind the new search handoff format. Its fields were written for this project; no third-party search or screening code was copied.
