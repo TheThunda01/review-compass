@@ -1,15 +1,15 @@
-<!-- 
-  This repository does not accept pull requests through the normal process. 
-  PRs without the 'pre-approved' label will be automatically closed. If you are learning about this repository
-  and are following the steps, then you need to make changes in your own account.
-  
-  If you need this PR to be merged, you have two options:
+## Change
 
-  1. Label this PR with the 'pre-approved' label if you have admin or enough privileges
+Describe the problem and resulting behavior. Link a related issue if applicable.
 
-  or
+## Validation
 
-  2. Tag alfredodeza to take a look
+Describe the checks you ran and their results. For application changes, run
+`node --test tests/*.test.mjs` and the relevant JavaScript syntax checks from the
+README. For documentation changes, check the affected links and instructions.
 
-  Thank you for your understanding!
--->
+## Evidence and scope
+
+If the change affects a scientific claim, search record, or example result,
+identify its supporting evidence and any remaining limitations. Use synthetic
+examples; exclude private review records and credentials.

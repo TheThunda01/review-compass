@@ -1,14 +1,14 @@
+# Review Compass support
 
-# Support
+For questions, reproducible bugs, and feature requests, use the
+[Review Compass issue tracker](https://github.com/TheThunda01/review-compass/issues).
+Search existing issues first. Include the affected page or command, browser or
+Node.js version, expected behavior, and steps to reproduce the problem. Use
+synthetic examples and omit private review records or credentials.
 
-## How to file issues and get help  
+Report suspected security vulnerabilities through the private route in
+[SECURITY.md](SECURITY.md).
 
-This project uses GitHub Issues to track bugs and feature requests. Please search the existing 
-issues before filing new issues to avoid duplicates.  For new issues, file your bug or 
-feature request as a new Issue.
-
-For help and questions about using this project, please [file an issue](https://github.com/microsoft/codespaces-teaching-template-js/issues/new)
-
-## Microsoft Support Policy  
-
-Support for this **PROJECT or PRODUCT** is limited to the resources listed above.
+Review Compass is maintained independently. The original Microsoft portfolio
+template is documented in [TEMPLATE_ORIGIN.md](TEMPLATE_ORIGIN.md); its upstream
+issue tracker and support contacts do not support Review Compass.
