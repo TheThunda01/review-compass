@@ -1,16 +1,16 @@
 # Review Compass
 
-**Turn a review idea into an inspectable plan, and keep a record of how each search was described.**
+**Turn a review idea into a plan others can inspect, and record the details of each search.**
 
 ## Why this project
 
-Review Compass helps organize a review question, eligibility rules, search terms, extraction fields, and reporting notes before discussion with a librarian, mentor, or research team. The aim is to make decisions visible, not to replace scientific judgment. Start with the [background and themes](docs/project-context.md) or [evidence-review concepts](docs/biology-and-concepts.md).
+Review Compass helps you prepare a review plan to discuss with a librarian, mentor, or research team. It organizes your question, eligibility rules, search terms, extraction fields, and reporting notes so others can examine your decisions. Researchers still judge the methods and evidence. Start with the [background and themes](docs/project-context.md) or [evidence-review concepts](docs/biology-and-concepts.md).
 
 ## What it does
 
-An evidence review brings sources together to answer a question; eligibility rules say which sources belong. The working app is in [`review-compass-showcase/`](review-compass-showcase/). It includes a planner, educational method pages, a manual search checklist, a record-count calculator, and a Markdown export. The page uses HyperText Markup Language (HTML), Cascading Style Sheets (CSS), and JavaScript in your browser; no model, inference service, or database search runs behind it.
+An evidence review brings sources together to answer a question; eligibility rules say which sources belong. The working app in [`review-compass-showcase/`](review-compass-showcase/) provides a planner, educational method pages, a manual search checklist, a record-count calculator, and a Markdown export. It runs in your browser using HyperText Markup Language (HTML), Cascading Style Sheets (CSS), and JavaScript. It does not run a model, call an inference service, or search a database.
 
-The command-line interface (CLI), used through a terminal, inspects query structure and creates a portable **operator-reported search record** pairing exact query text and input fingerprints with an operator's database, platform, date, limits, and result count. Drafts remain drafts; unknown counts remain `null`. A recorded count is not independently verified.
+The command-line interface (CLI) runs in a terminal. It checks query structure and creates a portable **operator-reported search record**: the exact query, input-file fingerprints, and the database, platform, date, limits, and result count you supply. It preserves draft status and records unknown counts as `null`. It does not verify the reported count.
 
 ## Quick start
 
@@ -33,7 +33,7 @@ Create an example search record with Node.js 22 or later:
 node tools/record-search.mjs --query examples/search-draft.txt --metadata examples/search-record-metadata.json --output my-search-record.json
 ```
 
-The metadata fixture is explicitly a synthetic draft. No search is executed. Choose a new output path; existing files are not overwritten.
+The example metadata describes a synthetic draft. The command does not execute a search. Choose a new output path; the recorder will not overwrite an existing file.
 
 To preserve a revision as a new file, supply the prior record and a reason:
 
@@ -55,7 +55,7 @@ The planner shows how many fields contain text and whether certain words were me
 
 Keyword matching recognizes complete words and literal phrases. It can show “animal study” even in “this was not an animal study,” because it does not interpret negation or context. It also misses relevant synonyms that are not in your configured phrases. These limitations are visible in the app and export. [Methods and limitations](docs/methods-and-limitations.md) explain the behavior and its rationale.
 
-The manual search checklist reports checked boxes, not independently verified work. The flow calculator checks arithmetic relationships in entered counts; it cannot establish that the records, reports, and studies were counted correctly.
+The manual search checklist counts the boxes you check; it does not verify the work. The flow calculator checks arithmetic in the entered counts, but it cannot establish whether you counted records, reports, and studies correctly.
 
 ### Inspect a search draft
 
@@ -69,7 +69,7 @@ It checks quotes, delimiters, empty groups, and selected text hazards. A clean r
 
 An operator-reported search record is a handoff format, not a full PRISMA-S report. It does not capture every source, query revision, deduplication procedure, or independent review decision. See the [practical-use contract](docs/practical-use.md) for its fields and failure behavior.
 
-The optional revision block records the immediate predecessor's record ID and exact file SHA-256, plus your reason. It does not prove that the history is complete, authenticate authorship, or verify reported execution. Search dates still describe searches rather than revision timestamps; a corrected historical record can retain its earlier search date.
+The optional revision block links a record to the previous version through its record ID and exact file SHA-256, and includes your reason for the change. This link does not prove that the history is complete, identify the author, or verify that a search ran. The search date describes the search, not the revision, so a corrected historical record can retain its earlier search date.
 
 ## Documentation
 

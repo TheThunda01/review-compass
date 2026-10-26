@@ -4,7 +4,7 @@ Terminology: [glossary](glossary.md). For assumptions and their limits, see [ass
 
 ## Where this fits
 
-Review Compass fits at the planning and documentation stages of a review. Its browser app helps articulate a question and inspect literal search or screening cues. Its new standalone recorder helps keep the text of a search with the context reported by the person who ran it. It does not submit that search or verify a database response.
+Use Review Compass to plan and document a review. The browser app helps you state a question and inspect literal search or screening cues. The standalone recorder stores the exact search text with the context you report. It does not submit the search or verify a database response.
 
 ## Input and output contract
 
@@ -21,13 +21,13 @@ Use Node.js 22 or later. `tools/record-search.mjs` accepts a UTF-8 query file of
 | `limits` | Text, at most 10,000 characters; empty means not recorded, not “no limits” |
 | `notes` | Optional text, at most 10,000 characters |
 
-Unknown or missing required fields fail. The output schema is `review-compass-search-record/1`. It preserves query text, including a UTF-8 BOM if present, metadata, original input SHA-256 fingerprints, and the existing structural audit. It labels all execution details as operator-reported. One record describes one search version; it does not append to a database.
+The recorder rejects unknown fields and missing required fields. The output schema is `review-compass-search-record/1`. It preserves query text, including a UTF-8 BOM if present, metadata, original input SHA-256 fingerprints, and the existing structural audit. It labels all execution details as operator-reported. One record describes one search version; it does not append to a database.
 
 Exit `0` means a record was written or printed, even if its query has structural findings. Exit `2` means invalid arguments, encoding, metadata, limits, or an output error. This differs from the standalone audit's exit `1`: a record of a flawed query is still a valid historical record. Use `--output` with a new path; inputs and existing output files are never overwritten. Without it, JSON goes to standard output.
 
 **Round 2, 20 October 2026:** optional `--predecessor PRIOR.json --reason TEXT` links a revision to a supported `review-compass-search-record/1` file of at most 8 MiB. Both flags and `--output NEW.json` are required together. The new `recordId` must differ from the predecessor and its directly visible predecessor, if any. Reason text must be nonblank and at most 10,000 characters; surrounding whitespace is removed.
 
-The optional `revision` block uses schema `review-compass-revision/1` and stores `predecessorRecordId`, `predecessorSha256`, and `reason`. The hash covers the exact predecessor JSON file, including formatting. Its core metadata schema and any immediate revision block are checked before writing. The CLI also recomputes the UTF-8 hash of the stored predecessor query text and requires it to match that record’s query fingerprint. Files named by the predecessor are not opened or checked. Failed validation produces exit 2 without a new record. With no predecessor flags, the previous output is unchanged.
+The optional `revision` block uses schema `review-compass-revision/1` and stores `predecessorRecordId`, `predecessorSha256`, and `reason`. The hash covers the exact predecessor JSON file, including formatting. Before writing, the CLI checks the predecessor’s core metadata schema and any immediate revision block. It also recomputes the UTF-8 hash of the stored predecessor query text and requires it to match that record’s query fingerprint. It does not open or check files named by the predecessor. If validation fails, it exits with status 2 without creating a record. With no predecessor flags, the previous output is unchanged.
 
 ## Worked use case
 
@@ -51,9 +51,11 @@ For a revision, compare the stored predecessor digest with the file you intend t
 
 ## Known limits
 
-The schema is custom, not a complete PRISMA-S implementation. It does not record every reporting item, authenticate the operator, establish coverage, calculate recall, or deduplicate retrievals. Its date is self-reported. Query syntax and hit counts can change across platforms and over time. The browser planner has not gained a database connector or automated eligibility decision. Its flow calculator assumes one retained record per sought report; it does not reconcile records with documents or distinct studies. Its search builder combines all generated blocks with AND, so outcome or context blocks may exclude useful evidence. JSON exports may contain sensitive notes; inspect them before sharing.
+The custom schema covers only part of PRISMA-S reporting. It does not record every reporting item, authenticate the operator, establish coverage, calculate recall, or deduplicate retrievals. The operator supplies the date. Query syntax and hit counts can change across platforms and over time.
 
-This is an immediate link, not a complete revision database. The recorder rejects reuse of IDs visible in the predecessor and its one stored link, but it does not traverse a larger ancestry graph. It cannot detect a missing older revision, a fabricated predecessor, or unsupported claims in an execution field. The original metadata-file byte hash cannot be recomputed from parsed metadata because its original formatting is absent. The pure `linkRevision` helper checks structure; the CLI performs the query-hash comparison. No signature, authenticated history, or database response is created. The browser planner does not yet import these linked records.
+The browser planner does not connect to a database or decide eligibility. Its flow calculator assumes one retained record per sought report; it does not reconcile records with documents or distinct studies. Its search builder combines all generated blocks with AND, so outcome or context blocks may exclude useful evidence. Inspect JSON exports before sharing them; they may contain sensitive notes.
+
+The recorder links each revision to its immediate predecessor. It rejects reuse of IDs visible in that predecessor and its one stored link, but it does not trace the full revision history. It cannot detect a missing older revision, a fabricated predecessor, or unsupported claims in an execution field. The original metadata-file byte hash cannot be recomputed from parsed metadata because its original formatting is absent. The pure `linkRevision` helper checks structure; the CLI performs the query-hash comparison. No signature, authenticated history, or database response is created. The browser planner does not yet import these linked records.
 
 ## Next improvements
 
