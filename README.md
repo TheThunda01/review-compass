@@ -45,6 +45,8 @@ The new record must have a different `recordId`. The predecessor is never rewrit
 
 ## Example results
 
+The [editable search-handoff diagram](docs/search-workflow.md) shows where drafting ends, where an operator executes a search, and what the exported record does and does not establish.
+
 The [example search record](examples/search-record.json) retains the synthetic query, its SHA-256 fingerprint of exact file bytes, a structural audit, and `executionStatus: "draft"` with `resultCount: null`. The app's built-in screening examples all remain **Needs human review**, including apparently relevant text, missing text, and exclusion cues. No recall, precision, or time-saving claim follows from those examples.
 
 ## Practical use and limitations

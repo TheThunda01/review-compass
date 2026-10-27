@@ -1,0 +1,4 @@
+# Search fixtures record exact source and predecessor byte fingerprints.
+# Preserve canonical bytes on Windows even when core.autocrlf is enabled.
+examples/search-*.json -text
+examples/search-*.txt -text
