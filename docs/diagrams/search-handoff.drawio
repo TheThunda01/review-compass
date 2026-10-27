@@ -1,0 +1,84 @@
+<?xml version='1.0' encoding='utf-8'?>
+<mxfile host="app.diagrams.net" version="32.6.1">
+  <diagram name="Search drafts and operator records" id="search-handoff">
+    <mxGraphModel dx="1140" dy="860" grid="1" gridSize="10" page="1" pageScale="1" pageWidth="1140" pageHeight="860">
+      <root>
+        <mxCell id="0" />
+        <mxCell id="1" parent="0" />
+        <mxCell id="title" value="Keep search drafting, execution, and records distinct" style="html=0;align=center;verticalAlign=middle;fontFamily=Arial;fontSize=16;spacing=12;text;strokeColor=none;fillColor=none;fontSize=24;fontStyle=1;fontColor=#153c4a;" vertex="1" parent="1">
+          <mxGeometry x="20" y="20" width="1100" height="55" as="geometry" />
+        </mxCell>
+        <mxCell id="lane1" value="BROWSER PLANNER" style="html=0;align=center;verticalAlign=middle;fontFamily=Arial;fontSize=16;spacing=12;text;strokeColor=none;fillColor=none;fontSize=14;fontColor=#425b65;" vertex="1" parent="1">
+          <mxGeometry x="25" y="100" width="200" height="35" as="geometry" />
+        </mxCell>
+        <mxCell id="plan" value="Question + eligibility&#10;Enter terms and plans" style="html=0;align=center;verticalAlign=middle;fontFamily=Arial;fontSize=16;spacing=12;rounded=1;fillColor=#eef4f8;strokeColor=#88a8b7;fontColor=#183c4d;" vertex="1" parent="1">
+          <mxGeometry x="30" y="155" width="235" height="95" as="geometry" />
+        </mxCell>
+        <mxCell id="draft" value="Generated query draft&#10;Inspect and revise syntax&#10;No database search occurs" style="html=0;align=center;verticalAlign=middle;fontFamily=Arial;fontSize=16;spacing=12;rounded=1;fillColor=#e0f0ec;strokeColor=#528b79;fontColor=#173e32;" vertex="1" parent="1">
+          <mxGeometry x="310" y="155" width="235" height="95" as="geometry" />
+        </mxCell>
+        <mxCell id="cue" value="Literal keyword cues&#10;No context or negation&#10;model&#10;Every record needs human&#10;review" style="html=0;align=center;verticalAlign=middle;fontFamily=Arial;fontSize=16;spacing=12;rounded=1;fillColor=#fff2d9;strokeColor=#b58b42;fontColor=#614618;" vertex="1" parent="1">
+          <mxGeometry x="590" y="155" width="235" height="95" as="geometry" />
+        </mxCell>
+        <mxCell id="export" value="Markdown export&#10;Current draft and notes&#10;No inclusion decision" style="html=0;align=center;verticalAlign=middle;fontFamily=Arial;fontSize=16;spacing=12;rounded=1;fillColor=#eef4f8;strokeColor=#88a8b7;fontColor=#183c4d;" vertex="1" parent="1">
+          <mxGeometry x="870" y="155" width="235" height="95" as="geometry" />
+        </mxCell>
+        <mxCell id="lane2" value="OPERATOR + COMMAND LINE" style="html=0;align=center;verticalAlign=middle;fontFamily=Arial;fontSize=16;spacing=12;text;strokeColor=none;fillColor=none;fontSize=14;fontColor=#425b65;" vertex="1" parent="1">
+          <mxGeometry x="25" y="350" width="300" height="35" as="geometry" />
+        </mxCell>
+        <mxCell id="query" value="Query file&#10;Structural audit + SHA-256&#10;A clean audit is not search&#10;validation" style="html=0;align=center;verticalAlign=middle;fontFamily=Arial;fontSize=16;spacing=12;rounded=1;fillColor=#eef4f8;strokeColor=#88a8b7;fontColor=#183c4d;" vertex="1" parent="1">
+          <mxGeometry x="30" y="405" width="260" height="110" as="geometry" />
+        </mxCell>
+        <mxCell id="execute" value="Actual database&#10;Operator tests / executes&#10;search&#10;Outside Review Compass" style="html=0;align=center;verticalAlign=middle;fontFamily=Arial;fontSize=16;spacing=12;rounded=1;fillColor=#fff2d9;strokeColor=#b58b42;fontColor=#614618;" vertex="1" parent="1">
+          <mxGeometry x="345" y="405" width="260" height="110" as="geometry" />
+        </mxCell>
+        <mxCell id="record" value="Operator-reported JSON&#10;Platform, date, limits,&#10;status, count&#10;Unknown count stays null" style="html=0;align=center;verticalAlign=middle;fontFamily=Arial;fontSize=16;spacing=12;rounded=1;fillColor=#e0f0ec;strokeColor=#528b79;fontColor=#173e32;" vertex="1" parent="1">
+          <mxGeometry x="660" y="405" width="260" height="110" as="geometry" />
+        </mxCell>
+        <mxCell id="revision" value="New revision record&#10;Prior ID + file hash +&#10;reason&#10;New ID and new output path" style="html=0;align=center;verticalAlign=middle;fontFamily=Arial;fontSize=16;spacing=12;rounded=1;fillColor=#eef4f8;strokeColor=#88a8b7;fontColor=#183c4d;" vertex="1" parent="1">
+          <mxGeometry x="660" y="630" width="260" height="100" as="geometry" />
+        </mxCell>
+        <mxCell id="prior" value="Prior record stays unchanged&#10;Hash links bytes, not author&#10;identity&#10;History completeness is not&#10;established" style="html=0;align=center;verticalAlign=middle;fontFamily=Arial;fontSize=16;spacing=12;rounded=1;fillColor=#fff2d9;strokeColor=#b58b42;fontColor=#614618;" vertex="1" parent="1">
+          <mxGeometry x="290" y="630" width="300" height="100" as="geometry" />
+        </mxCell>
+        <mxCell id="notes" value="Draft records can be saved before execution. An “executed” status and count are supplied by the operator.&#10;The recorder does not verify that the search ran, certify coverage, or evaluate screening accuracy." style="html=0;align=center;verticalAlign=middle;fontFamily=Arial;fontSize=16;spacing=12;text;strokeColor=none;fillColor=none;fontSize=14;fontColor=#425b65;" vertex="1" parent="1">
+          <mxGeometry x="40" y="770" width="1060" height="65" as="geometry" />
+        </mxCell>
+        <mxCell id="edge0" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=0;endArrow=block;strokeColor=#62808b;fontFamily=Arial;fontSize=13;labelBackgroundColor=#ffffff;exitX=1;exitY=.5;entryX=0;entryY=.5;" edge="1" parent="1" source="plan" target="draft">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="edge1" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=0;endArrow=block;strokeColor=#62808b;fontFamily=Arial;fontSize=13;labelBackgroundColor=#ffffff;exitX=1;exitY=.5;entryX=0;entryY=.5;" edge="1" parent="1" source="draft" target="cue">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="edge2" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=0;endArrow=block;strokeColor=#62808b;fontFamily=Arial;fontSize=13;labelBackgroundColor=#ffffff;exitX=1;exitY=.5;entryX=0;entryY=.5;" edge="1" parent="1" source="cue" target="export">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="edge3" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=0;endArrow=block;strokeColor=#62808b;fontFamily=Arial;fontSize=13;labelBackgroundColor=#ffffff;exitX=1;exitY=.5;entryX=0;entryY=.5;dashed=1;" edge="1" parent="1" source="query" target="execute">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="edge4" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=0;endArrow=block;strokeColor=#62808b;fontFamily=Arial;fontSize=13;labelBackgroundColor=#ffffff;exitX=1;exitY=.5;entryX=0;entryY=.5;dashed=1;" edge="1" parent="1" source="execute" target="record">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="edge5" value="query bytes" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=0;endArrow=block;strokeColor=#62808b;fontFamily=Arial;fontSize=13;labelBackgroundColor=#ffffff;exitX=.5;exitY=1;entryX=.25;entryY=1;" edge="1" parent="1" source="query" target="record">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="160" y="560" />
+              <mxPoint x="725" y="560" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="edge6" value="preserve a revision" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=0;endArrow=block;strokeColor=#62808b;fontFamily=Arial;fontSize=13;labelBackgroundColor=#ffffff;exitX=.75;exitY=1;entryX=.5;entryY=0;" edge="1" parent="1" source="record" target="revision">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="855" y="585" />
+              <mxPoint x="790" y="585" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="edge7" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=0;endArrow=block;strokeColor=#62808b;fontFamily=Arial;fontSize=13;labelBackgroundColor=#ffffff;exitX=1;exitY=.5;entryX=0;entryY=.5;" edge="1" parent="1" source="prior" target="revision">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+      </root>
+    </mxGraphModel>
+  </diagram>
+</mxfile>
