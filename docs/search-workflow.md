@@ -8,6 +8,8 @@ A record may stay a draft with an unknown (`null`) result count. When an operato
 
 The [example revision](../examples/search-revision.json) links to the previous record's ID and exact file fingerprint while preserving the earlier file. This supports inspection of a particular handoff. It does not establish who created the record, whether all revisions were retained, or whether the search ran. See the [practical-use contract](practical-use.md) and [search audit](search-audit.md).
 
+The bundled search fixtures preserve exact bytes through Git checkout, including on Windows with automatic line-ending conversion enabled. Tests compare the audit, query/metadata fingerprints, and revision's predecessor fingerprint to those actual files. Both Linux and Windows CI run these checks; changing a fixture requires deliberately rebuilding its dependent examples.
+
 ## Edit and reproduce
 
 The [draw.io source](diagrams/search-handoff.drawio) retains editable labels and connectors. To regenerate its committed SVG and PNG previews with draw.io Desktop:
