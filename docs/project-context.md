@@ -2,6 +2,10 @@
 
 Terminology: [glossary](glossary.md). For assumptions and their limits, see [assumptions](assumptions.md).
 
+## Where this fits
+
+[EvidenceTrail](https://github.com/TheThunda01/evidencetrail) is the related research-workflow demonstration for inspecting extraction records and documenting human decisions. Read the two projects as complementary stages of evidence work. Their example files are separate, and the portfolio does not implement an automatic handoff or validate a combined review process. Return to the [portfolio guide](https://github.com/TheThunda01/TheThunda01/blob/main/PROJECT_GUIDE.md).
+
 ## Background and rationale
 
 Review Compass helps students and researchers make early review decisions explicit: what question to ask, which sources matter, what makes a study eligible, and how to document those choices. It brings these decisions into one workspace for discussion with a mentor, librarian, or review team.

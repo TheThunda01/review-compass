@@ -4,6 +4,8 @@
 
 ## Why this project
 
+Review Compass supports question framing in [From biological measurements to better experiments](https://github.com/TheThunda01/TheThunda01/blob/main/PROJECT_GUIDE.md). It helps make a proposed evidence review inspectable before its conclusions inform later research questions. The portfolio’s modeling studies then explore separate questions about what measurements can support.
+
 Review Compass helps you prepare a review plan to discuss with a librarian, mentor, or research team. It organizes your question, eligibility rules, search terms, extraction fields, and reporting notes so others can examine your decisions. Researchers still judge the methods and evidence. Start with the [background and themes](docs/project-context.md) or [evidence-review concepts](docs/biology-and-concepts.md).
 
 ## What it does
