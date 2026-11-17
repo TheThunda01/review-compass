@@ -233,43 +233,43 @@
           <div class="panel-heading">
             <div>
               <p class="surface-label">Step 5</p>
-              <h3 id="flow-heading">Draft the PRISMA flow counts</h3>
-              <p class="field-note">Starts with example counts. This simplified calculation assumes one retained record corresponds to one report and combines source pathways. Reconcile records with reports and count distinct studies separately; this is not a complete PRISMA flow diagram.</p>
+              <h3 id="flow-heading">Trace records through screening</h3>
+              <p class="field-note">Replace the example counts with your own. The chart assumes one retained record per report and combines search sources. Reconcile records with reports before counting distinct studies.</p>
             </div>
           </div>
           <div class="flow-workbench">
             <form id="flow-form" class="flow-form" aria-label="PRISMA flow count inputs">
               <label>
                 <span>Database records</span>
-                <input type="number" min="0" step="1" name="databaseRecords" inputmode="numeric">
+                <input type="text" pattern="[0-9]+" required name="databaseRecords" inputmode="numeric">
               </label>
               <label>
                 <span>Register records</span>
-                <input type="number" min="0" step="1" name="registerRecords" inputmode="numeric">
+                <input type="text" pattern="[0-9]+" required name="registerRecords" inputmode="numeric">
               </label>
               <label>
                 <span>Other-source records</span>
-                <input type="number" min="0" step="1" name="otherRecords" inputmode="numeric">
+                <input type="text" pattern="[0-9]+" required name="otherRecords" inputmode="numeric">
               </label>
               <label>
                 <span>Duplicates removed</span>
-                <input type="number" min="0" step="1" name="duplicatesRemoved" inputmode="numeric">
+                <input type="text" pattern="[0-9]+" required name="duplicatesRemoved" inputmode="numeric">
               </label>
               <label>
                 <span>Automation exclusions</span>
-                <input type="number" min="0" step="1" name="automationExcluded" inputmode="numeric">
+                <input type="text" pattern="[0-9]+" required name="automationExcluded" inputmode="numeric">
               </label>
               <label>
                 <span>Records excluded</span>
-                <input type="number" min="0" step="1" name="recordsExcluded" inputmode="numeric">
+                <input type="text" pattern="[0-9]+" required name="recordsExcluded" inputmode="numeric">
               </label>
               <label>
                 <span>Reports not retrieved</span>
-                <input type="number" min="0" step="1" name="reportsNotRetrieved" inputmode="numeric">
+                <input type="text" pattern="[0-9]+" required name="reportsNotRetrieved" inputmode="numeric">
               </label>
               <label>
                 <span>Reports excluded</span>
-                <input type="number" min="0" step="1" name="reportsExcluded" inputmode="numeric">
+                <input type="text" pattern="[0-9]+" required name="reportsExcluded" inputmode="numeric">
               </label>
             </form>
             <div id="flow-output" class="flow-output" aria-live="polite"></div>
