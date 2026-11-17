@@ -59,7 +59,7 @@ The planner shows how many fields contain text and whether certain words were me
 
 Keyword matching recognizes complete words and literal phrases. It can show “animal study” even in “this was not an animal study,” because it does not interpret negation or context. It also misses relevant synonyms that are not in your configured phrases. These limitations are visible in the app and export. [Methods and limitations](docs/methods-and-limitations.md) explain the behavior and its rationale.
 
-The manual search checklist counts the boxes you check; it does not verify the work. The flow calculator checks arithmetic in the entered counts, but it cannot establish whether you counted records, reports, and studies correctly.
+Open **Flow** to see where records leave screening. Replace the example counts with whole numbers, including zero. The chart appears once the counts reconcile. It assumes one retained record per report, so check report-to-study links separately. The manual search checklist records which boxes you checked.
 
 ### Inspect a search draft
 
